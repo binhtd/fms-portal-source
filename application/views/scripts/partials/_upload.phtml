@@ -1,0 +1,156 @@
+<?php	
+	$this->headLink()->appendStylesheet($this->baseUrl('/css/default.css'));
+	$this->headScript()->appendFile($this->baseUrl('/javascripts/swfupload/swfupload.js'));
+	$this->headScript()->appendFile($this->baseUrl('/javascripts/swfupload/swfupload.queue.js'));
+	$this->headScript()->appendFile($this->baseUrl('/javascripts/swfupload/swfupload.speed.js'));
+	$this->headScript()->appendFile($this->baseUrl('/javascripts/swfupload/handlers.js'));	
+	$this->headScript()->appendFile($this->baseUrl('/javascripts/swfupload/fileprogress.js'));	
+	
+?>
+<p class="warning" id="processRunningLabel">
+	<img src="<?php echo $this->baseUrl('/images/ajax-loader.gif');?>"/>
+	process is running
+</p>
+<p>
+	You can now proceed with your file(s) upload by clicking on the Upload & Save button. 
+</p>
+<p>
+	Note that only Archives files (zip, rar, ace, cab, 7z,tar, gz ...) are supported.
+</p>
+<br/>
+<div style="width: 61px; height: 22px; margin-bottom: 10px;">
+		<span id="spanButtonPlaceHolder"></span>
+</div>
+<br/>
+<table cellspacing="0" class="swfupload_table">
+	<tr>
+		<td>
+			<table cellspacing="0">
+				<tr class="odd_tr">
+					<td>Files Queued:</td>
+					<td id="tdFilesQueued" class="event_td"></td>
+				</tr>			
+				<tr>
+					<td>Files Uploaded:</td>
+					<td id="tdFilesUploaded" class="event_td"></td>
+				</tr>			
+				<tr class="odd_tr">
+					<td>Errors:</td>
+					<td id="tdErrors" class="event_td"></td>
+				</tr>		
+			</table>
+		</td>
+		<td>
+			<table cellspacing="0" >
+				<tr class="odd_tr">
+					<td>Current Speed:</td>
+					<td id="tdCurrentSpeed" class="event_td"></td>
+				</tr>			
+				<tr>
+					<td>Average Speed:</td>
+					<td id="tdAverageSpeed" class="event_td"></td>
+				</tr>			
+				<tr class="odd_tr">
+					<td>Moving Average Speed:</td>
+					<td id="tdMovingAverageSpeed" class="event_td"></td>
+				</tr>			
+				<tr>
+					<td>Time Remaining</td>
+					<td id="tdTimeRemaining" class="event_td"></td>
+				</tr>			
+				<tr class="odd_tr">
+					<td>Time Elapsed</td>
+					<td id="tdTimeElapsed" class="event_td"></td>
+				</tr>			
+				<tr>
+					<td>Percent Uploaded</td>
+					<td id="tdPercentUploaded" class="event_td"></td>
+				</tr>			
+				<tr class="odd_tr">
+					<td>Size Uploaded</td>
+					<td id="tdSizeUploaded" class="event_td"></td>
+				</tr>			
+				<tr>
+					<td>Progress Event Count</td>
+					<td id="tdProgressEventCount" class="event_td"></td>
+				</tr>			
+			</table>
+		</td>
+	</tr>
+</table>
+<div class="fieldset flash" id="fsUploadProgress">
+	<span class="legend">Upload Queue</span>
+</div>
+
+<input id="btnCancel" type="button" value="Cancel All Uploads" onclick="swfu.cancelQueue();" disabled="disabled" style="display:none;" />
+<form method="post" action="<?php echo $this->url();?>">
+	<input type="submit" value="<?php echo $this->backLabel; ?>" id="backbutton" name="backbutton" />	  
+	<input type="submit" value="View Files" id="seefilesbutton" name="seefilesbutton" />	
+	<input type="submit" value="<?php echo $this->setHoStatusLabel; ?>" id="setHoStatusButton" name="setHoStatusButton" <?php  echo (!$this->showSetHoStatusButton ? "disabled='disabled'" : ""); ?> />
+</form>
+<script type="text/javascript">
+
+var swfu;
+
+window.onload = function() {	
+	$('#setHoStatusButton').click(function(){
+		$("#processRunningLabel").show();
+		$('#setHoStatusButton').unbind('click');
+		$('#seefilesbutton').attr('disabled','disabled');
+		$('#backbutton').attr('disabled','disabled');
+	});	
+
+	var settings = {
+		flash_url : '<?php echo $this->baseUrl("/javascripts/swfupload/swfupload.swf")?>',
+		flash9_url : '<?php echo $this->baseUrl("/javascripts/swfupload/swfupload_fp9.swf")?>',
+		upload_url: "<?php echo $this->url(); ?>",
+		post_params: {"PHPSESSID" : "<?php echo session_id(); ?>"},
+		file_size_limit : "1024 MB",
+		file_types : "*.zip;  *.rar; *.7z; *.tar.gz; *.tgz; *.tar.Z; *.tar.bz2; *.tbz2; *.tar.lzma, *.tlz; *.ace; *.cab",
+		file_types_description : "All Files",
+		file_upload_limit : 100,
+		file_queue_limit : 0,
+		debug: false,
+
+		// Button settings
+		button_image_url: '<?php echo $this->baseUrl("/images/TestImageNoText_120x29.png")?>',
+		button_width: "109",
+		button_height: "22",
+		button_placeholder_id: "spanButtonPlaceHolder",		
+		button_text_left_padding: 12,
+		button_text_top_padding: 3,
+		
+		moving_average_history_size: 40,
+			
+		// The event handler functions are defined in handlers.js
+		swfupload_preload_handler : preLoad,
+		swfupload_load_failed_handler : loadFailed,
+		file_queued_handler : fileQueued,
+		file_queue_error_handler : fileQueueError,
+		file_dialog_complete_handler: fileDialogComplete,
+		upload_start_handler : uploadStart,
+		upload_progress_handler : uploadProgress,
+		upload_error_handler : uploadError,
+		upload_success_handler : uploadSuccess,
+		upload_complete_handler : uploadComplete,
+			
+		custom_settings : {
+			progressTarget : "fsUploadProgress",
+			cancelButtonId : "btnCancel",
+			tdFilesQueued : document.getElementById("tdFilesQueued"),
+			tdFilesUploaded : document.getElementById("tdFilesUploaded"),
+			tdErrors : document.getElementById("tdErrors"),
+			tdCurrentSpeed : document.getElementById("tdCurrentSpeed"),
+			tdAverageSpeed : document.getElementById("tdAverageSpeed"),
+			tdMovingAverageSpeed : document.getElementById("tdMovingAverageSpeed"),
+			tdTimeRemaining : document.getElementById("tdTimeRemaining"),
+			tdTimeElapsed : document.getElementById("tdTimeElapsed"),
+			tdPercentUploaded : document.getElementById("tdPercentUploaded"),
+			tdSizeUploaded : document.getElementById("tdSizeUploaded"),
+			tdProgressEventCount : document.getElementById("tdProgressEventCount")
+		}
+	};
+
+	swfu = new SWFUpload(settings);
+ };
+</script>

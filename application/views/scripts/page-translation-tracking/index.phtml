@@ -1,0 +1,52 @@
+<?php
+$this->title = "Page Translation Tracking |";
+$this->headTitle($this->title);
+?>
+<form method="post" action="<?php echo $this->url(array('controller' => 'PageTranslationTracking', 'action' => 'index')); ?>">
+	<a href="<?php echo $this->url(array('controller'=>'PageTranslationTracking', 'action'=>'export'));?>">Export Tracking</a>
+	<table class="adminlist" border="1px">
+			<thead>
+				<?php
+					// Display pagination control
+					echo $this->paginationControl($this->paginator, 'Sliding', '/partials/paginator.phtml', array("colspan" => 3));
+				?>			
+				<tr>				
+					<th >
+						Page/URL
+					</th>
+					<th >
+						Language
+					</th>
+					<th >
+						Number of Visits	
+					</th>				
+				</tr>
+			</thead>
+			<tfoot>
+				<?php
+					// Display pagination control
+					echo $this->paginationControl($this->paginator, 'Sliding', '/partials/paginator.phtml', array("colspan" => 3));
+				?>			
+			</tfoot>
+			<tbody>
+				<?php 
+					if ( 0 == count($this->resultSet)){
+						echo $this->partial('/partials/paginator_nodata.phtml', array("colspan" => 3));
+					}				
+				?>
+				<?php foreach($this->resultSet as $pagetranslationtracking ):?>
+				<tr>	
+					<td class="center">
+						<?php echo $this->escape($pagetranslationtracking->PageUrl);?>
+					 </td>
+					<td class="center">
+						<?php echo $this->escape($pagetranslationtracking->TranslationLanguage);?>				
+					</td>			
+					<td class="center">
+						<?php echo $this->escape($pagetranslationtracking->CountTranslation);?>				
+					</td>										
+				</tr>		
+				<?php endforeach;?>
+			</tbody>
+	</table>
+</form>	

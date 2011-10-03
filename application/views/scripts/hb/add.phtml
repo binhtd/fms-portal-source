@@ -1,0 +1,97 @@
+<?php
+$this->title = "Add New HB |";
+$this->headTitle($this->title);
+
+?>
+<p>
+This module is designed for JTE PMs to Create one Handback, linked to one Client's Handoff which as the status "HO - received".
+</p>
+<form method="post" action="<?php echo $this->url(); ?>" enctype="application/x-www-form-urlencoded" id="HO">
+	<dl class="zend_form">
+		<dt id="UserName-label" >
+			<label class="required" for="UserName">Client Name</label>
+		</dt>		
+		<dd id="UserName-element">			
+			<select id="UserName" name="UserName" tabindex="1" >
+				<option value="0" > please select one</option>
+				<?php foreach($this->users as $user):?>				
+					<option value="<?php echo $user->UserID; ?>">
+						<?php echo $user->UserName; ?>
+					</option>
+				<?php endforeach; ?>				
+			</select>
+			<?php if ( isset($this->UserNameMessage)): ?>
+				<ul class="errors">				
+						<li><?php echo $this->UserNameMessage; ?></li>					
+				</ul>
+			<?php endif;?>
+		</dd>
+		
+		<dt id="HandOff-label">
+			<label class="required" for="HandOff">Handoff</label>
+		</dt>
+		<dd id="HandOff-element">			
+			<select id="HandOff" name="HandOff" tabindex="2">
+					<option  value="0">
+						please select one
+					</option>
+			</select>
+			<?php if ( isset($this->HandOffMessage)): ?>
+				<ul class="errors">				
+						<li><?php echo $this->HandOffMessage; ?></li>					
+				</ul>
+			<?php endif;?>
+		</dd>		
+		<dt id="HandBackComments-label">
+			<label class="required" for="HandBackComments">Handback Comments</label>
+		</dt>
+		<dd id="HandBackComments-element" style="clear:left; margin-left:0px">
+			<?php echo $this->partial('/partials/_editor.phtml', array("webeditordata" =>  isset($this->content)? $this->content : null))?>
+			<?php if ( isset($this->ContentMessage)): ?>
+				<ul class="errors">				
+						<li><?php echo $this->ContentMessage; ?></li>					
+				</ul>
+			<?php endif;?>
+		</dd>
+		<dd id="hoaddlistbuttonaction">			
+			<input type="submit" value="<?php echo $this->SAVE_UPLOAD; ?>" id="saveuploadlaterbutton" name="action">	
+			<input type="submit" value="<?php echo $this->SAVE_UPLOAD_LATER; ?>" id="submitbutton" name="action">			
+			<input type="submit" value="<?php echo $this->CANCEL; ?>" id="cancelbutton" name="action">
+		</dd>
+	</dl>
+</form>
+<script type="text/javascript">
+	$(document).ready(function() {
+			$('#UserName').focus();
+			$("#UserName option[value='<?php echo $this->UserID ?>']").attr('selected', 'selected');
+			$("#UserName option[value='<?php echo $this->UserID ?>']").change();
+	});
+	
+	$("#UserName").change(function(){
+		$.ajax({
+		  type:"POST",
+		  url: '<?php echo $this->url(array("controller"=> "hb", "action"=> "get-availabe-ho-for-one-user"))?>' + '/userid/' + $("#UserName").val(),
+		  dataType: 'json',
+		  success: function(data){
+						$("#HandOff option").remove();
+						$('#HandOff').append("<option value='0'>please select one </option>");
+						for(var i=0; i< data.length; i++){														
+							var str = pad(data[i].HandOffID, 8) + " / " + data[i].HandOffTitle;
+							$('#HandOff').append("<option value='" + data[i].HandOffID + "' title='" + str + "'>" + 
+							(str.length > 63 ? str.substr(0,60) + "..." : str) + '</option>');
+						}						
+						
+						$("#HandOff option[value='<?php echo $this->HandOffID;?>']").attr('selected', 'selected');
+					}
+	  });
+	});
+	
+	function pad(number, length) {	   
+		var str = '' + number;
+		while (str.length < length) {
+			str = '0' + str;
+		}	   
+		
+		return "Bento_" + str;
+	}
+</script>

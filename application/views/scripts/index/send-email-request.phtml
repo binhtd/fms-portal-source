@@ -1,0 +1,17 @@
+<?php
+	$this->title = "Send Email Request |";
+	$this->headTitle($this->title);
+?>
+<p class="warning" id="processRunningLabel">
+	<img src="<?php echo $this->baseUrl('/images/ajax-loader.gif');?>"/>
+	process is running
+</p>
+<?php
+	echo $this->form;
+?>
+<script type="text/javascript">
+	$('#submitbutton').click(function(){			
+		$('#submitbutton').unbind('click');
+		$("#processRunningLabel").show();	
+	});	
+</script>

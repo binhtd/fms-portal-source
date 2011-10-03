@@ -1,0 +1,88 @@
+<?php
+$this->title = "Index HB |";
+$this->headTitle($this->title);
+?>
+<form method="post" action="<?php echo $this->url(array('controller' => 'hb', 'action' => 'index')); ?>">
+	<a href="<?php echo $this->url(array('controller'=>'hb',
+		'action'=>'add'));?>" id="addnewhandback" class="AddNewHoOrHBLink">Add new Handback</a><br/>
+	<table class="adminlist" border="1px">
+		<thead>
+			<?php
+				// Display pagination control
+				echo $this->paginationControl($this->paginator, 'Sliding', '/partials/paginator.phtml', array("colspan" => 7));
+			?>
+			<tr>				
+				<th width="5%">
+					HandBackID
+				</th>
+				<th width="5%">
+					HandOffID
+				</th>
+				<th width="10%">
+					UploadDate
+				</th>			
+				<th width="5%">
+					#Files
+				</th>		
+				<th width="5%">
+					Handback files
+				</th>		
+				<th width="20%">
+					Handback Comments
+				</th>						
+				<th width="8%">
+					&nbsp;
+				</th>
+			</tr>
+		</thead>
+		<tfoot>			
+			<?php
+				// Display pagination control
+				echo $this->paginationControl($this->paginator, 'Sliding', '/partials/paginator.phtml', array("colspan" => 7));
+			?>
+		</tfoot>
+		<tbody>
+			<?php 
+				if ( 0 == count($this->resultSet)){
+					echo $this->partial('/partials/paginator_nodata.phtml', array("colspan" => 7));
+				}				
+			?>
+			<?php foreach($this->resultSet as $handback ):?>
+				<tr>	
+					<td class="center">
+						<?php echo $handback->HandBackID; ?>
+					 </td>
+					<td class="center">
+						<?php echo $handback->HandOffID; ?>
+					</td>
+					<td class="center">
+						<?php echo $handback->HandBackUploadDate; ?>
+					</td>
+					<td class="center">
+						<?php echo ($handback->HandBackTotalNumberOfUploadFiles <> 0) ? $handback->HandBackTotalNumberOfUploadFiles : "<span style='color:red'>" . $handback->HandBackTotalNumberOfUploadFiles ."</span>" ; ?>
+					</td>		
+					<td class="center">
+						<?php if ($handback->HandBackTotalNumberOfUploadFiles >0): ?>
+							<a href="<?php echo $this->url(array('controller' => 'fm', 'action' => 'index',
+										'handoffid'=> $handback->HandOffID, "download"=> "hb", "limit" => null, "page" => null
+										)); ?>">View files</a>
+						<?php else:?>
+							NA
+						<?php endif;?>
+					</td>		
+					<td class="center">
+						<?php echo html_entity_decode($handback->HandBackComments); ?> 
+					</td>				
+					<td class="center">						
+						<?php if ($handback->AllowModifyHbRecord):?>
+							<a href="<?php echo $this->url(array('controller'=>'hb', 'action'=>'edit','handbackid' => $handback->HandBackID)); ?>">Edit</a> |
+							<a href="<?php echo $this->url(array('controller'=>'hb','action'=>'delete','handbackid'=> $handback->HandBackID)); ?>">Delete</a>
+						<?php else: ?>
+							NA
+						<?php endif;?>
+					</td>
+				</tr>
+			<?php endforeach;?>	
+		</tbody>
+	</table>
+</form>	

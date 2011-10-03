@@ -1,0 +1,37 @@
+<?php
+	$this->title = "Add New Language |";
+	$this->headTitle($this->title);
+?>
+<?php if (isset($this->insertErrorMessage)) :?>
+<ul class="errors">
+	<li><?php echo $this->insertErrorMessage; ?></li>
+</ul>
+<?php endif;?>
+<?php			
+echo $this->form;
+?>
+<script type="text/javascript">
+	$(function(){
+		$('#LanguageName').focus();
+		if( !$("#LanguageIsActive").is(":checked")){
+			$("#LanguageIsShowInSourceList-label").hide("fast");
+			$("#LanguageIsShowInSourceList-element").hide("fast");
+			$("#LanguageIsShowInTargetList-label").hide("fast");
+			$("#LanguageIsShowInTargetList-element").hide("fast");
+		}
+		
+		if( $("#LanguageIsActive").is(":checked")){
+			$("#LanguageIsShowInSourceList-label").show("fast");
+			$("#LanguageIsShowInSourceList-element").show("fast");
+			$("#LanguageIsShowInTargetList-label").show("fast");
+			$("#LanguageIsShowInTargetList-element").show("fast");	
+		}
+			
+		$("#LanguageIsActive").click(function(){
+			$("#LanguageIsShowInSourceList-label").toggle();
+			$("#LanguageIsShowInSourceList-element").toggle();
+			$("#LanguageIsShowInTargetList-label").toggle();
+			$("#LanguageIsShowInTargetList-element").toggle();	
+		});
+	});
+</script>

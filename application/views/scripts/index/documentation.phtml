@@ -1,0 +1,490 @@
+<div style="margin:11px">
+	<p >
+		<img src="<?php echo $this->baseUrl('/images/documents/bento_logo_doc.png');?>" height="113" hspace="0" width="324" border="0">
+	</p>
+	<a name="Top"></a>
+	<h2 >		
+		Welcome to Bento Localization Portal Documentation
+	</h2>
+	<p>
+		This web-based Portal is designed to aid Jonckers' clients with their Localization Handoffs and Handbacks.
+	</p>
+	<p>
+		It is a File transfer alternative to FTP, email or any other Client proprietary solution.
+	</p>
+	<a href="<?php echo $this->baseUrl('/ho/index');?>">Back to Bento Localization Portal</a>	
+	<h2>Table of Contents</h2>
+	<p><a href="#Terminology">Terminology</a></p>
+	<p><a href="#Workflow">Workflow</a></p>
+	<p><a href="#Supported_files">Supported files</a></p>
+	<p><a href="#Supported_browsers">Supported browsers</a></p>
+	<p>How To</p>
+	<blockquote>
+		<p>A. <a href="#A.">Login</a></p>
+		<p>B. <a href="#B.">Change your Login Password</a></p>
+		<p>C. <a href="#C.">Client-Side Scenarios</a></p>
+		<blockquote>
+			<p>1. <a href="#1.">Create one Handoff</a></p>
+			<p>2. <a href="#2.">Edit one Handoff</a></p>
+			<p>3. <a href="#3.">Cancel one Handoff</a></p>
+			<p>4. <a href="#4.">Download localized files and Close one Handoff</a></p>
+		</blockquote>
+		<p>D. <a href="#D.">Jonckers Team-Side Scenarios</a></p>
+		<blockquote>
+		<p>1. <a href="#1.">Download Client Files</a></p>
+		<p>2. <a href="#2.">Confirm reception of one Handoff</a></p>
+		<p>3. <a href="#3.">Create one Handback</a></p></blockquote>
+		<p>E. <a href="#E.">Administration Tasks</a></p>
+		<blockquote>
+		<p>1. <a href="#1.">Manage automatic Email templates</a></p>
+		<p dir="ltr" align="left">2. <a href="#2.">Manage Languages</a></p>
+		<p dir="ltr" align="left">3. <a href="#3.">Manage Users </a></p>
+		</blockquote>
+	</blockquote>
+	<h2 ><a name="Terminology"></a>Terminology</h2>
+	<p >HO: Handoff</p>
+	<p >HB: Handback</p>
+	<p >PM: Project Manager</p>
+	<p >JTE: Jonckers Translation & Engineering</p>
+	<p><a href="#Top">Top</a></p>
+	<h2 ><a name="Workflow"></a>Workflow</h2>
+	<p >
+		The following localization Workflow has been designed. It's an important concept to keep in mind when using the portal to understand the HO Status Naming.
+	</p>
+	<p >
+		<img src="<?php echo $this->baseUrl('/images/documents/Doc_FMS_Portal_Status_WF.JPG');?>" height="404" hspace="0" width="1069" border="0">
+	</p>
+	<p >
+		<span class="bold_text">HO - Created: </span>HO has been created by the client. Client can upload files.
+	</p>
+	<p >
+		<span class="bold_text">HO - Cancelled: </span>HO has been cancelled by the client. Can be done only if Ho status < HO - Readytoloc
+	</p>
+	<p >
+		<span class="bold_text">HO - Ready To Loc :</span> Client uploaded Files to the portal, HO has been sent to Jonckers and is ready to be picked up for localization.
+	</p>
+	<p>
+		<span class="bold_text">HO - Received :</span> Jonckers PM confirms reception of the HO by changing its status into HO-Received
+	</p>
+	<p>
+		<span class="bold_text">HB - Completed :</span> Jonckers PM has uploaded localized files, ready to be picked up by the client..
+	</p>
+	<p>
+		<span class="bold_text">HO - Closed:</span> Client confirms reception of the localized files and closes the HO.
+	</p>
+	<p><a href="#Top">Top</a></p>
+	<a name="Supported_files"></a>
+	<h2>Supported files</h2>
+	<p>
+		For File(s) upload, the portal supports the following compressed file format:
+	</p>
+	<p>
+		<span class="bold_text">zip, rar, ace, cab, 7z, tar.gz, tar.Z, tgz</span> 
+	</p>	
+	<p><a href="#Top">Top</a></p>
+	<a name="Supported_browsers"></a>
+	<h2>Fully supported browsers:</h2>
+	<p>Internet Explorer 8 <a href="http://www.microsoft.com/windows/ie/downloads/default.asp">http://www.microsoft.com/windows/ie/downloads/default.asp</a></p>
+	<p>Note for Internet Explorer 9 users:<p>
+	<p>As you might experience layout issues with this browser, we recommend that you activate the <span class="bold_text">Compatibility View</span> for better results.</p>
+	<p>
+		<img alt="Compatibility view" src="<?php echo $this->baseUrl('/images/documents/IE9.jpg');?>" height="72" hspace="0" width="403" border="0">
+	</p>	
+	<p>Google Chrome <a href="http://www.google.com/chrome">http://www.google.com/chrome</a></p>
+	<p>Firefox 4.0+ <a href="http://www.mozilla.com/en-US/firefox/all.html">http://www.mozilla.com/en-US/firefox/all.html</a></p>
+	<p><a href="#Top">Top</a></p>
+	<h2 >HOW TO</h2>
+	<a name="A." login=""></a>
+	<h3>A. Login</h3>
+	<p>
+		If you need an account, please contact your Jonckers representative via Email. You can also Use the
+		<span class="bold_text">Create a Bento Account</span> Link.
+	</p>
+	<p>
+		If you forgot your Login or Password, you can send us an email via the appropriate
+		<span class="bold_text">Forgot Password?</span> Link.
+	</p>
+	<p>
+		<img alt="Login Screen" src="<?php echo $this->baseUrl('/images/documents/Login.jpg');?>" height="160" hspace="0" width="304" border="0">
+	</p>
+	<a href="#Top">Top</a>
+	<a name="B."></a>
+	<h3>B. Change your Login password</h3>
+	<p>
+		After Login, You have opportunity to change your password in the <span class="bold_text">MY ACCOUNT</span> tab.
+	</p>
+	<p>
+		<img src="<?php echo $this->baseUrl('/images/documents/MyAccount_tab.jpg');?>" height="270" hspace="0" width="859" border="0">
+	</p>
+	<a href="#Top">Top</a>
+	<a name="C."></a>
+	<h3>C. Client-Side Scenarios</h3>
+	<p>
+		These Features are designed to work only for Jonckers Client profiles.
+	</p>
+	<a name="1."></a>
+	<h3>1. Create one Handoff</h3>
+	<p>
+		In <span class="bold_text">HANDOFF</span> tab, click the <span class="bold_text">Add new handoff</span> link.
+		<img src="<?php echo $this->baseUrl('/images/documents/AddNewHO.jpg');?>" height="18" hspace="0" width="118" border="0">
+	</p>
+	<p>The following screen appears.</p>
+	<p>
+		<img src="<?php echo $this->baseUrl('/images/documents/AddNewHO_page.jpg');?>" height="605" hspace="0" width="645" border="0">
+	</p>
+	<p>
+		<span class="bold_text">Handoff Title</span>: Enter a Title for your Handoff. For best user experience, choose one brief Title that is descriptive enough for your project.
+	</p>
+	<p>
+		<span class="bold_text">Handoff Date</span>: This date is automatically set by the System.
+	</p>
+	<p>
+		<span class="bold_text">Handoff Source LanguageID</span>: Select ONE source language.
+	</p>
+	<p>
+		<span class="bold_text">Handoff Target LanguageID</span>: Select one or multiple target languages.
+	</p>
+	<p>
+		The Top 10 source languages And Top 50 target languages managed in Jonckers are displayed by default.</p>
+	<p>
+		In case you are missing languages, Please contact your Jonckers PM, it can be easily added.
+	</p>
+	<p>
+		<span class="bold_text">Handoff Instruction</span>:Write any Comment or Instructions for your Handoff that you want to pass on to Jonckers Team. This text will be included in the Notification Email. This area is rich text format enabled and allows you to add any kind of formatted text, such as hyperlinks.
+	</p>
+	<p>
+		<span class="bold_text">Save</span>: This button allows you to save the Handoff information in the portal and brings you back to the Handoff page. You will be able to add files later on, through the Edit Function of your Handoff.
+		<img src="<?php echo $this->baseUrl('/images/documents/EditHOLink.JPG');?>" height="30" hspace="0" width="74" border="0">
+	</p>
+	<p>
+		<span class="bold_text">Cancel</span>: This button brings you back to the Handoff page, and discards any information you entered for your current Handoff.
+	</p>
+	<p>
+		<span class="bold_text">Save & upload files</span>: This button allows you to save the Handoff information in the portal and brings you to the File Manager module where you can upload your archive files as Shown below:
+	</p>
+	<p>
+		<img src="<?php echo $this->baseUrl('/images/documents/Upload&SaveFiles_Client.JPG');?>" height="312" hspace="0" width="637" border="0">
+	</p>
+	<p>
+		<span class="bold_text">Back</span>: This button brings you back to the Handoff page. The Handoff will not be sent to Jonckers until you set it as "Ready to loc". You will be able to add files later on, through the Edit Function of your Handoff.
+		<img src="<?php echo $this->baseUrl('/images/documents/EditHOLink.JPG');?>" height="30" hspace="0" width="74" border="0">
+	</p>
+	<p>
+		<span class="bold_text">View Files</span>: This button displays the <span>Bento File Manager</span>&nbsp;where you can see/delete the uploaded files for your Handoff.
+	</p>
+	<p>
+		<span class="bold_text">Send to Jonckers</span>: This button is grayed out until you uploaded at least one file for your Handoff.
+	</p>
+	<p>
+		<span class="bold_text">Upload files</span>: This button allows you to upload the file(s). Select the archive file(s) you want to upload into the portal and click <span class="bold_text">Open</span>.
+	</p>
+	<p>
+		<img src="<?php echo $this->baseUrl('/images/documents/SelectFiletoUpload.JPG');?>" height="419" hspace="0" width="563" border="0">
+	</p>
+	<p>A progress bar will keep you informed on the Upload Status. </p>
+	<p>
+		Once completed, your files are uploaded into the portal. You can verify your upload(s) by clicking the <span class="bold_text">View Files</span> button.
+	</p>
+	<p>
+		This button displays the <span>Bento File Manager</span> where you can see/delete the uploaded files for your 
+		Handoff.
+	</p>
+	<p>
+		<img src="<?php echo $this->baseUrl('/images/documents/FMS_uploadedFiles.JPG');?>" height="179" hspace="0" width="637" border="0">
+	</p>
+	<p>
+		Click <span class="bold_text">Back </span>to return to Upload files screen, you can now click on&nbsp;<span class="bold_text">Send to Jonckers</span>.
+		<img src="<?php echo $this->baseUrl('/images/documents/SetHOasReadytoloc.JPG');?>" height="27" hspace="0" width="126" border="0">
+	</p>
+	<p>
+		This button allows you to set the Handoff status as "HO - ReadyToLoc"
+	<img src="<?php echo $this->baseUrl('/images/documents/HoStatus_readyToloc.JPG');?>" height="51" hspace="0" width="120" border="0"> 
+	and informs Jonckers Team via email that your files are ready to be localized.
+	</p>
+	<p>
+		You will not be able to do any further changes in your Handoff. 
+	</p>
+	<p>
+		If you are not willing to send the Handoff to Jonckers right away, click on <span class="bold_text">Back</span>. You will 
+		be able to add files later on, through the Edit Function of your Handoff. 
+		<img src="<?php echo $this->baseUrl('/images/documents/EditHOLink.JPG');?>" height="30" hspace="0" width="74" border="0">
+	</p>
+	<a href="#Top">Top</a>
+	<a name="2."></a>
+	<h3>2. Edit one Handoff</h3>
+	<p>
+		According to Portal's <a href="#Workflow">Workflow</a>, Clients are allowed to edit their Handoffs, as long as they didn't submit it to Jonckers team, i.e. HO Status equals "Ho - Created".
+	</p>
+	<p>
+		In HANDOFF tab, search for you HO to be edited and click Edit
+		<img src="<?php echo $this->baseUrl('/images/documents/EditHOLink.JPG');?>" height="30" hspace="0" width="74" border="0>
+	</p>
+	<p>You'll be able to: </p>
+	<ul>
+	  <li>
+		Modify all fields related to your Handoff
+	  </li>
+	  <li>
+		Upload files / supplemental files
+	  </li>
+	  <li>
+		Change the Handoff Status
+	  </li>
+	</ul>
+	<a href="#Top">Top</a>
+	<a name="3."></a>
+	<h3>3. Cancel one Handoff</h3>
+	<p>
+		According to Portal's <a href="#Workflow">Workflow</a>, Clients are allowed to&nbsp;cancel their Handoffs, as long as they didn't submit it to Jonckers team, i.e. HO Status equals "Ho - Created".
+	</p>
+	<p>
+		If you need to cancel one HO that you already sent to localization, contact your Local Jonckers PM.
+	</p>
+	<p>
+		To cancel one "Ho - Created" Handoff, In HANDOFF tab, search for your HO and click Edit
+		<img src="<?php echo $this->baseUrl('/images/documents/EditHOLink.JPG');?>" height="30" hspace="0" width="74" border="0">
+	</p>
+	<p>
+		Change the Handoff Status to <span class="bold_text">HO - Cancelled.</span>
+	</p>
+	<p>
+		<img src="<?php echo $this->baseUrl('/images/documents/SetHOasCancelled.JPG');?>" height="78" hspace="0" width="259" border="0">
+	</p>
+	<p>Click <span class="bold_text">Save.</span></p>	
+	<a href="#Top">Top</a>
+	<a name="4."></a>
+	<h3>4. Download localized files and Close one Handoff</h3>
+	<p>
+		After localization of the HO files, Jonckers PM will Set the HO as "HB - Completed". Client will be notified by email.
+	</p>
+	<p>
+		At this stage, Client will be able to Download localized files and Confirm reception of Jonckers' HB by Closing the HO.
+	</p>
+	<p>
+		To Download the localized files for your HO, In HANDOFF tab, click on the <span class="bold_text">View files</span> link under <span class="bold_text">Handback Files</span> column.<img src="<?php echo $this->baseUrl('/images/documents/SeeHBFiles_link.JPG');?>" height="53" hspace="0" width="60" border="0">
+	</p>
+	<p>
+		To close the HO, In HANDOFF tab, click Edit
+		<img src="<?php echo $this->baseUrl('/images/documents/EditHBCompletedLink.JPG');?>" height="20" hspace="0" width="78" border="0"> for your HO, change its status to <span class="bold_text">HO - Closed</span> and <span class="bold_text">Save</span>.
+	</p>
+	<p>
+		You can choose whether you want to inform Jonckers PM of this status change by keeping the checkbox activated (recommended) or not.
+	</p>
+	<p>
+		<img src="<?php echo $this->baseUrl('/images/documents/SetHOasClosed2.JPG');?>" height="48" hspace="0" width="516" border="0">
+	</p>
+	<p>
+		You will still be able to download both HO and HB files anytime, after closure of the HO.
+	</p>
+	<a href="#Top">Top</a>
+	<a name="D."></a>
+	<h3>D. Jonckers Team-Side Scenarios</h3>
+	<p>
+		These Features are designed to work only for Jonckers Project Managers (PM) profiles.
+	</p>
+	<a name="1."></a>
+	<h3>	
+		<p>1. Download&nbsp;Client files </p>
+	</h3>
+	<p>The Jonckers PM managing the&nbsp;Client will receive an automatic email.</p>
+	<p>Files can be downloaded from the <span class="bold_text">Handoff </span>tab, by 
+	clicking the <span class="bold_text">View files</span> Link in the Handoff column. <img src="<?php echo $this->baseUrl('/images/documents/Ho_seeFiles.JPG');?>" height="49" hspace="0" width="80" border="0"></p>
+	<a href="#Top">Top</a>
+	<a name="2." handoff="" one="" of="" reception="" confirm=""></a>
+	<h3>2. Confirm reception of one Handoff</h3>
+	<p>
+		Note that for <a href="#Workflow">Workflow</a> Compliance, you are entitled to Confirm reception of one Handoff only when its status is set as "HO - ReadyToLoc".
+	</p>
+	<p>
+		In HANDOFF tab, search for you HO to be edited and click Edit
+		<img src="<?php echo $this->baseUrl('/images/documents/EditHBCompletedLink.JPG');?>" height="20" hspace="0" width="78" border="0">.
+	</p>
+	<p>
+		Change the Handoff Status to <span class="bold_text">HO - Received.</span>
+	</p>
+	<p>
+		<img src="<?php echo $this->baseUrl('/images/documents/SetHOasReceived.JPG');?>" height="40" hspace="0" width="253" border="0">
+	</p>
+	<p>Click <span class="bold_text">Save</span>.</p>
+	<a href="#Top">Top</a>
+	<a name="3."></a>
+	<h3>
+		<p>3. Create one Handback</p>
+	</h3>
+	<p>
+		Note that for <a href="#Workflow">Workflow</a> Compliance, you are entitled to Create one HB only if the Status of the Linked Ho is set as "HO - received".
+	</p>
+	<p>
+		Handback module allows PMs to Create one Handback linked to one Client HO, and Upload Localized files to the Portal.
+	</p>
+	<p>
+		Click on <span class="bold_text">HANDBACK</span> Tab, then on <span class="bold_text">Add new Handback</span>.
+	</p>
+	<p>The following Screen appears:</p>
+	<p>
+		<img src="<?php echo $this->baseUrl('/images/documents/AddNewHB_page.jpg');?>" height="427" hspace="0" width="637" border="0">
+	</p>
+	<p>
+		Select the <span class="bold_text">Client Name</span> you want to create one HB for.
+	</p>
+	<p>
+		Select the <span class="bold_text">Handoff</span> you want to create one HB for. Only Handoffs with a <span class="bold_text">HO - received</span> Status will appear in the Hand Off Dropdown List.
+	</p>
+	<p>
+		Write any Comment you would like your client to receive as part of the Notification Email in the <span class="bold_text">Handback Comments </span>area. This area is rich text format enabled and allows you to add any kind of formatted text, such as hyperlinks.
+	</p>
+	<p>
+		If you want to upload your HB File(s) later, just save the HB information by clicking&nbsp;<span class="bold_text">Save</span>.
+	</p>
+	<p>
+		If you are ready to upload your HB File(s) Click <span class="bold_text">Save & Upload</span>. This button allows you to save the Handback information in the portal and brings you to the File Manager module where you can upload your archive files as Shown below:
+	</p>
+	<p>
+		<img src="<?php echo $this->baseUrl('/images/documents/Upload&SaveFiles_JTEPM.JPG');?>" height="313" hspace="0" width="650" border="0">
+	</p>
+	<p>
+		<span class="bold_text">Back</span>: This button brings you back to the Handback page.
+	</p>
+	<p>
+		<span class="bold_text">View Files</span>: This button displays the <span>Bento File Manager</span> where you can see/delete the uploaded files for your Handback.
+	</p>
+	<p>
+		<span class="bold_text">Send to Client</span>: This button is grayed out until you uploaded at least one file for your Handback.
+	</p>
+	<p>
+		<span class="bold_text">Upload files</span>: This button allows you to upload the file(s). Select the archive file(s) you want to upload into the portal and click <span class="bold_text">Open</span>.
+	</p>
+	<p>
+		<img src="<?php echo $this->baseUrl('/images/documents/SelectFiletoUpload.JPG');?>" height="420" hspace="0" width="561" border="0">
+	</p>
+	<p>
+		A progress bar will keep you informed on the Upload Status.
+	</p>
+	<p>
+		Once completed, your files are uploaded into the portal. You can verify your upload(s) by clicking the <span class="bold_text">View Files</span> button.
+	</p>
+	<p>
+		This button displays the <span>Bento File Manager</span> where you can see/delete the uploaded files for your 
+	Handback.
+	</p>
+	<p>
+	 <img src="<?php echo $this->baseUrl('/images/documents/FMS_uploadedFiles_JTEPM.JPG');?>" height="158" hspace="0" width="650" border="0">
+	</p>
+	<p>
+		Click <span class="bold_text">Back</span> to return to Upload files screen, you can now click on&nbsp;<span class="bold_text">Send to 
+	Client</span>.
+	</p>
+	<p>
+		<img src="<?php echo $this->baseUrl('/images/documents/SetHOasHBCompleted.JPG');?>" height="28" hspace="0" width="105" border="0">
+	</p>
+	<p>
+		This button will set the Handoff status as "HB - Completed"
+		<img src="<?php echo $this->baseUrl('/images/documents/Status_HBCompleted.JPG');?>" height="51" hspace="0" width="116" border="0"> and informs the client via email.
+	</p>
+	<p>
+		You will not be able to do any further changes in your Handoff / Handback.
+	</p>
+	<p>
+		If you are not willing to send the Handback to your client right away, click on <span class="bold_text">Back to Handback page</span>. You will be able to add files later on, through the Edit Function of your Handback.
+		<img src="<?php echo $this->baseUrl('/images/documents/EditHBLink.JPG');?>" height="31" hspace="0" width="81" border="0">
+	</p>
+	<a href="#Top">Top</a>
+	<a name="E." tasks="" administration=""></a>
+	<h3>E. Administration Tasks</h3>
+	<p>
+		Jonckers PM role has some admin rights to facilitate basic Bento Tasks handling.
+	</p>
+	<a name="1."></a>
+	<h3>1. Manage Users </h3>
+	<p>
+		In <span class="bold_text">USER</span> Tab, you can see Users account Details for both Client and Jonckers side.
+	</p>
+	<p>You can Edit Details for your own account.</p>
+	<p>
+		You can add a new user, by using the <span class="bold_text">Add new user</span> link <img src="<?php echo $this->baseUrl('/images/documents/AddNewUserLink.JPG');?>" height="83" hspace="0" width="297" border="0">.
+	</p>
+	<p>Here is a description of the Add new User page.</p>
+	<p>
+		<img src="<?php echo $this->baseUrl('/images/documents/AddNewUserPage.JPG');?>" height="342" hspace="0" width="427" border="0">
+	</p>
+	<p>
+		<span class="bold_text">User Name:</span> Real Name of the User<br><span class="bold_text">User Email:</span> Email of the user. Used for email notifications.<br><span class="bold_text">User Login Name:</span> Login name of the user, used for the login<br><span class="bold_text">password: </span>Password<br><span class="bold_text">Confirm Password: 
+		</span>Password<br><span class="bold_text">Bento Folder Name:</span> Name of the Bento Folder 
+		for File Upload. Recommendation is to use the same as Login 
+		Name.<br><span class="bold_text">Roles:</span>&nbsp; Select Either <span class="bold_text">User Is 
+		Client&nbsp;</span>or <span class="bold_text">User</span> <span class="bold_text">Is Jonckers PM</span>, 
+		according to the Needed role for the user.<br><span class="bold_text">JTE Project Manager Email:</span> When 
+		user has a&nbsp;Client Role, it needs to be associated with a Jonckers PM Email 
+		address that will be used for email notifications. This email address can be an 
+		alias, so you can include more than one person. If you need to create one 
+		Jonckers Alias,&nbsp;please contact ICT team.
+	</p>
+	<p><span class="bold_text">User Is Active:</span> Keep the checkbox activated 
+	unless you want to create an Inactive account.</p>
+	<p>If you need to perform actions on user's accounts you 
+	don't have permission for, please <a href="<?php echo $this->baseUrl('/index/contact/'); ?>">contact us</a>.</p>
+	<a href="#Top">Top</a>
+	<a name="2."></a>
+	<h3>
+		<p>2. Manage Languages</p>
+	</h3>
+	<p>
+		In <span class="bold_text">LANGUAGE </span>Tab, you can Edit Source/Target language Lists, and Add any new language.
+	</p>
+	<p>
+		To Edit Source/Target  language Lists, click on Edit link for the language you want to change.
+	</p>
+	<p>
+		Spanish (Argentina) is shown here as an example:
+	</p>
+	<p>
+		<img src="<?php echo $this->baseUrl('/images/documents/EditLanguage_Link.JPG');?>" height="53" hspace="0" width="625" border="0">
+	</p>
+	<p>The Edit Language page displays:</p>
+	<p>
+		<img src="<?php echo $this->baseUrl('/images/documents/EditLanguage_page.JPG');?>" height="177" hspace="0" width="638" border="0">
+	</p>
+	<p>
+		<span class="bold_text">Language Name</span>: You can edit the language 
+		Name<br><span class="bold_text">Language is active</span>: Uncheck the checkbox if you want to 
+		deactivate the language<br><span class="bold_text">Present in Source List</span>: Check the 
+		checkbox if you want to display the language in Source languages List 
+		(when creating one HO).<br><span class="bold_text">Present in Target List</span>: Check the 
+		checkbox if you want to display the language in Target languages 
+		List (when creating one HO).
+	</p>
+	<p>
+		To Add a Language which is not present in the Portal, click on Add new language link In <span class="bold_text">LANGUAGE </span>Tab
+		<img src="<?php echo $this->baseUrl('/images/documents/AddNewlanguageLink.jpg');?>" height="18" hspace="0" width="99" border="0">.
+	</p>
+	<a href="#Top">Top</a>
+	<a name="3."></a>
+	<h3>3. Manage automatic Email templates</h3>
+	<p>
+		You can Manage the email templates in <span class="bold_text">EMAIL</span> module.
+	</p>
+	<p>
+		According to the Portal's Workflow, it currently handles 4 types of email notification.
+	</p>
+	<p>
+		<img src="<?php echo $this->baseUrl('/images/documents/EmailTemplateStatus.JPG');?>" height="148" hspace="0" width="121" border="0">
+	</p>
+	<p>
+		To create a new email template, click on Add new email template 
+		<img src="<?php echo $this->baseUrl('/images/documents/AddNewEmailTemplateLink.JPG');?>" height="16" hspace="0" width="122" border="0">.
+	</p>
+	<p>
+		Be aware that if you create a new email template for one given Status, it will automatically deactivate the one currently in use.
+	</p>
+	<p>
+		Please <a href="<?php echo $this->baseUrl('/index/contact/'); ?>">contact us</a> if you need assistance.
+	</p>
+	<a href="#Top">Top</a>
+	<h3>Z. Documentation History</h3>
+	<p>April 04-12 2011 - Draft page for V1.00 created.</p>
+	<p>April 04-27-2011 - Draft page for V1.00 updated.</p>
+	<p>May 05-10-2011 - Final page candidate for V1.00.</p>
+	<p>July 07-08-2011 - Final page for V1.00.</p>
+	<p>Sept 09-20-2011 - Adding IE9 compatibility Note.</p>
+	<a href="<?php echo $this->baseUrl('/ho/index');?>">Back to Bento Portal</a>	
+</div>

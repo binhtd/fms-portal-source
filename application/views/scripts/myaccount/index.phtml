@@ -1,0 +1,72 @@
+<?php
+$this->title = "My Account |";
+$this->headTitle($this->title);
+?>
+<form method="post" action="<?php echo $this->url(array('controller' => 'myaccount', 'action'=>'index')); ?>">
+<dl class="zend_form">	
+	<dt id="UserName-label">
+		<label class="required" for="UserName">User Name</label>
+	</dt>
+	<dd id="UserName-element">
+		<?php echo $this->escape($this->user->UserName);?>
+	</dd>
+	<dt id="UserLoginName-label">
+		<label class="required" for="UserLoginName">User Login Name</label>
+	</dt>
+	<dd id="UserLoginName-element">
+		<?php echo $this->escape($this->user->UserLoginName);?>
+	</dd>
+	<dt id="UserRootUploadDirectory-label">
+		<label class="required" for="UserRootUploadDirectory">Upload Directory</label>
+	</dt>
+	<dd id="UserRootUploadDirectory-element">
+		<?php echo $this->escape($this->user->UserRootUploadDirectory);?>
+	</dd>
+	
+	<dt id="UserLastActivity">
+		<label class="optional">User Last Activity</label>
+	</dt>
+	<dd id="UserLastActivity-element">
+		<?php echo $this->escape($this->user->UserLastActivity);?>
+	</dd>
+	
+	<dt id="UserEmail-label">
+		<label class="required" for="UserEmail">User Email</label>
+	</dt>
+	<dd id="UserEmail-element">
+		<input id="UserEmail" type="text" maxlength="50" size="40" value="<?php echo $this->escape($this->user->UserEmail);?>" name="UserEmail">
+		<?php if( count($this->form->UserEmail->getMessages()) >0 ): ?>
+				<ul class="errors">
+					<?php foreach($this->form->UserEmail->getMessages() as $error): ?>
+						<li><?php echo $error; ?></li>
+					<?php endforeach;?>
+				</ul>
+		<?php endif;?>	
+	</dd>
+	
+	<dt id="UserPassword-label">
+		<label class="required" for="UserPassword">Password</label>
+	</dt>
+	<dd id="UserPassword-element">
+		<input id="UserPassword" type="password" maxlength="30" size="30" value="" name="UserPassword">
+	</dd>
+	
+	<dt id="UserConfirmPassword-label">
+		<label class="required" for="UserConfirmPassword">Confirm Password</label>
+	</dt>		
+	<dd id="UserConfirmPassword-element">
+		<input id="UserConfirmPassword" type="password" maxlength="30" size="30" value="" name="UserConfirmPassword">
+		<?php if( count($this->form->UserConfirmPassword->getMessages()) >0 ): ?>
+				<ul class="errors">
+					<?php foreach($this->form->UserConfirmPassword->getMessages() as $error): ?>
+						<li><?php echo $error; ?></li>
+					<?php endforeach;?>
+				</ul>
+		<?php endif;?>
+	</dd>
+
+	<dt id="submit-label">&nbsp;</dt>
+	<dd id="submit-element">
+		<input type="submit" value="Save" id="submitbutton" name="submit">
+	</dd>
+</dl>

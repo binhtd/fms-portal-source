@@ -1,0 +1,53 @@
+<?php
+	$this->headTitle("Add Email Template |");
+	
+	$this->headLink()->appendStylesheet($this->baseUrl('/css/default.css'));
+?>
+
+<form method="post" action="<?php echo $this->url();?>" enctype="application/x-www-form-urlencoded" id="Email">
+	<dl class="zend_form">
+		<?php
+			echo $this->form->EmailTemplateSubject;
+		?>
+		<dt id="EmailTemplateContent-label">
+			<label class="required" for="EmailTemplateContent">Email Template Content</label>
+		</dt>
+		<br />
+		
+		<?php echo $this->partial('/partials/_editor.phtml', array("webeditordata" => $this->form->content->getValue()));?>
+	   
+		<?php if( count($this->form->content->getMessages()) >0 ): ?>
+			<ul class="errors">
+				<?php foreach($this->form->content->getMessages() as $error): ?>
+					<li><?php echo $error; ?></li>
+				<?php endforeach;?>
+			</ul>
+		<?php endif;?>
+			
+		<?php
+			echo $this->form->EmailTemplateStatus;
+		?>
+		<dt id="EmailTemplateIsActive-label">
+			<label class="optional" for="EmailTemplateIsActive">Email template Is active</label>
+		</dt>
+		<dd id="EmailTemplateIsActive-element">
+			<input type="checkbox" value="Y" id="EmailTemplateIsActive" name="EmailTemplateIsActive" 
+			<?php echo $this->form->EmailTemplateIsActive->getValue() == "Y" ? "checked='checked'" : ""?>
+			>
+		</dd>
+		<dt id="submit-label">&nbsp;</dt>
+		<dd id="submit-element">
+			<input type="submit" value="Save" id="submitbutton" name="submit">
+		</dd>
+		<dt id="EmailTemplateID-label">&nbsp;</dt>
+		<dd id="EmailTemplateID-element">
+			<input type="hidden" id="EmailTemplateID" value="<?php echo $this->escape($this->form->EmailTemplateID->getValue());?>" name="EmailTemplateID">
+		</dd>
+		<?php echo $this->form->hash; ?>
+	</dl>
+</form>
+<script type="text/javascript">
+	$(function(){
+		$('#EmailTemplateSubject').focus();
+	});
+</script>

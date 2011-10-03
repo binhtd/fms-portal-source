@@ -1,0 +1,297 @@
+<?php
+$this->title = "Edit HO |";
+$this->headTitle($this->title);
+
+echo $this->headScript()->appendFile($this->baseUrl('/javascripts/jquery-ui-1.8.16.custom.min.js'));
+echo $this->headLink()->prependStylesheet($this->baseUrl('/css/ui-lightness/jquery-ui-1.8.10.custom.css'));
+?>
+<p class="warning" id="processRunningLabel">
+	<img src="<?php echo $this->baseUrl('/images/ajax-loader.gif');?>"/>
+	process is running
+</p>
+<form method="post" action="<?php echo $this->url(); ?>" enctype="application/x-www-form-urlencoded" id="HO">
+	<dl class="zend_form">
+		<dt id="HandOffTitle-label">
+			<label class="required" for="HandOffTitle">Handoff Title</label>
+		</dt>
+		<dd id="HandOffTitle-element">
+			<input type="text" maxlength="50" size="40" value="<?php echo $this->form->HandOffTitle->getValue(); ?>" id="HandOffTitle" name="HandOffTitle">
+			<?php if( count($this->form->HandOffTitle->getMessages()) >0 ): ?>
+				<ul class="errors">
+					<?php foreach($this->form->HandOffTitle->getMessages() as $error): ?>
+						<li><?php echo $error; ?></li>
+					<?php endforeach;?>
+				</ul>
+			<?php endif;?>
+		</dd>
+		<dt id="HandOffStartProject-label">
+			<label class="required" for="HandOffStartProject">Handoff Date</label>
+		</dt>
+		<dd id="HandOffStartProject-element">
+			<input type="text" size="20" value="<?php echo $this->form->HandOffStartProject->getValue(); ?>" id="HandOffStartProject" name="HandOffStartProject">
+			<?php if( count($this->form->HandOffStartProject->getMessages()) >0 ): ?>
+				<ul class="errors">
+					<?php foreach($this->form->HandOffStartProject->getMessages() as $error): ?>
+						<li><?php echo $error; ?></li>
+					<?php endforeach;?>
+				</ul>
+			<?php endif;?>
+
+		</dd>
+				
+		<div style="float:left; width:300px">
+			<dt id="HandOffSourceLanguageID-label" style="width:180px">
+				<label class="required" for="HandOffSourceLanguageID">Handoff Source LanguageID</label>
+			</dt>
+			
+			<dd id="HandOffSourceLanguageID-element" style="float: left;">	
+				<div style="width: 250px; height:167px; border: 1px solid #7F9DB9;">
+					<select style="width: 250px; height:165px; border: 0px solid white" size="10" id="HandOffSourceLanguageID" name="HandOffSourceLanguageID">
+						<?php foreach($this->sourceListlanguage as $language):?>				
+							<option label="<?php echo $language->LanguageName; ?>" value="<?php echo $language->LanguageID; ?>"
+							<?php if($this->form->HandOffSourceLanguageID->getValue() == $language->LanguageID){  
+										echo "selected='selected'";
+									}
+							?>
+							title="you only can select one source LanguageID">
+								<?php echo $language->LanguageName; ?>
+							</option>
+						<?php endforeach; ?>
+					</select>
+				</div>
+				<?php if( count($this->form->HandOffSourceLanguageID->getMessages()) >0 ): ?>
+					<ul class="errors">
+						<?php foreach($this->form->HandOffSourceLanguageID->getMessages() as $error): ?>
+							<li><?php echo $error; ?></li>
+						<?php endforeach;?>
+					</ul>
+				<?php endif;?>				
+			</dd>
+		</div>
+		<div  style="float:left; width:300px">
+			<dt id="HandOffListTargetLanguageID-label" style="width:180px; margin-left:15px">
+				<label class="required" for="HandOffListTargetLanguageID">Handoff Target LanguageID</label>
+			</dt>
+					
+			<dd id="HandOffListTargetLanguageID-element" style="float: left;">
+				<div style="width: 250px; height:167px; overflow:scroll; border: 1px solid #7F9DB9;" id="HandOffListTargetLanguageID">
+					<?php foreach($this->targetListlanguage as $language):?>				
+						<label for="HandOffListTargetLanguageID-<?php echo $language->LanguageID; ?>">
+							<input id="HandOffListTargetLanguageID-<?php echo $language->LanguageID; ?>" type="checkbox" value="<?php echo $language->LanguageID; ?>" name="HandOffListTargetLanguageID[]"
+								<?php 												
+									if($this->form->HandOffListTargetLanguageID->getValue() !=""){
+										foreach( $this->form->HandOffListTargetLanguageID->getValue() as $targetLanguage){
+											if($targetLanguage == $language->LanguageID){
+												echo "checked='checked'";
+											}
+										}
+									}
+								?>
+							>
+							<?php echo $language->LanguageName; ?>
+						</label>
+						<br/>
+					<?php endforeach; ?>					
+				</div>			
+				<?php if( count($this->form->HandOffListTargetLanguageID->getMessages()) >0 ): ?>
+						<ul class="errors">
+							<?php foreach($this->form->HandOffListTargetLanguageID->getMessages() as $error): ?>
+								<li><?php echo $error; ?></li>
+							<?php endforeach;?>
+						</ul>
+				<?php endif;?>
+			</dd>
+		</div>
+		
+		
+<dt id="HandOffStatus-label">
+			<label class="required" for="HandOffStatus">Handoff Status</label>
+		</dt>
+		<dd id="HandOffStatus-element">
+			<select id="HandOffStatus" name="HandOffStatus">
+				<?php foreach($this->hostatus as $status):?>
+					<option label="<?php echo $status; ?>" value="<?php echo $status; ?>"	
+						<?php if($this->form->HandOffStatus->getValue() == $status){ echo "selected='selected'";}?>>
+						<?php echo $status; ?>
+					</option>
+				<?php endforeach;?>
+			</select>
+			<label for="NotifyHoStatusChange" id="NotifyHoStatusChangeLabel">
+				<input type="checkbox" name="NotifyHoStatusChange" value="1" id="NotifyHoStatusChange" checked="checked">
+				Send an email notification on HO status change
+			</label>
+			<?php if( count($this->form->HandOffStatus->getMessages()) >0 ): ?>
+				<ul class="errors">
+					<?php foreach($this->form->HandOffStatus->getMessages() as $error): ?>
+						<li><?php echo $error; ?></li>
+					<?php endforeach;?>
+				</ul>
+			<?php endif;?>
+			<?php if($this->hbStatusAndCountFileUploadInvalidMessage <> null):?>
+				<ul class="errors">
+					<li><?php echo $this->hbStatusAndCountFileUploadInvalidMessage; ?></li>
+				</ul>
+			<?php endif;?>
+			<?php if($this->hoStatusAndUploadInvalidMessage <> null):?>
+				<ul class="errors">
+					<li><?php echo $this->hoStatusAndUploadInvalidMessage; ?></li>
+				</ul>
+			<?php endif;?>
+			
+			<?php if($this->hoStatusAndCountFileUploadInvalidMessage <> null):?>
+				<ul class="errors">
+					<li><?php echo $this->hoStatusAndCountFileUploadInvalidMessage; ?></li>
+				</ul>
+			<?php endif;?>			
+			<?php if($this->mappingBetweenHoAndHbMessage <> null):?>
+				<ul class="errors">
+					<li><?php echo $this->mappingBetweenHoAndHbMessage; ?></li>
+				</ul>
+			<?php endif;?>						
+		</dd>
+		<?php if($this->form->HandOffStatus->getValue() == Application_Model_DbTable_HOs::HO_UPLOADED):?>
+			<dt style="width:280px">			
+				<input type="checkbox" <?php if($this->form->CheckboxExpectedHandbackDate->getValue() == "Y"){ echo "selected='selected'";}?> name="checkboxExpectedHandbackDate" id="checkboxExpectedHandbackDate">
+					Inform your client about expected handback Date
+			</dt>
+			<dd id="ExpectedHandBackDate-element">		
+				<input type="text" size="20" value="<?php echo $this->form->ExpectedHandBackDate->getValue();?>" id="ExpectedHandBackDate" name="ExpectedHandBackDate">
+				<?php if( count($this->form->ExpectedHandBackDate->getMessages()) >0 ): ?>
+					<ul class="errors">
+						<?php foreach($this->form->ExpectedHandBackDate->getMessages() as $error): ?>
+							<li><?php echo $error; ?></li>
+						<?php endforeach;?>
+					</ul>
+				<?php endif;?>	
+			</dd>
+		<?php endif;?>
+		<dt id="HandOffInstruction-label">
+			<label class="required" for="HandOffInstruction">Handoff Instruction</label>
+		</dt>
+		<dd id="HandOffInstruction-element" style="clear:left; margin-left:0px">
+			<?php echo $this->partial('/partials/_editor.phtml', array("webeditordata" => $this->form->content->getValue()))?>
+			<?php if( count($this->form->content->getMessages()) >0 ): ?>
+				<ul class="errors">
+					<?php foreach($this->form->content->getMessages() as $error): ?>
+						<li><?php echo $error; ?></li>
+					<?php endforeach;?>
+				</ul>
+			<?php endif;?>
+
+		</dd>
+		<dd id="hoaddlistbuttonaction">
+			
+			<input type="submit" value="<?php echo $this->SAVE_UPLOAD; ?>" 
+			<?php if ((!$this->validHOStatusForSaveUpload) || ($this->hoStatusAndUploadInvalidMessage <> null) || 
+			($this->hoStatusAndCountFileUploadInvalidMessage <> null)):?> 
+				disabled="disabled" 
+			<?php endif;?>
+			id="saveuploadlaterbutton" name="action">	
+			<input type="submit" value="<?php echo $this->SAVE_UPLOAD_LATER; ?>" id="submitbutton" name="action">			
+			<input type="submit" value="<?php echo $this->CANCEL; ?>" id="cancelbutton" name="action">
+		</dd>
+		<input type="hidden" id="HandOffID" value="0" name="HandOffID">
+		<input type="hidden" id="UserID" value="0" name="UserID">		
+		<input type="hidden" id="HandOffTotalNumberOfUploadFiles" value="<?php echo $this->form->getValue('HandOffTotalNumberOfUploadFiles'); ?>" name="HandOffTotalNumberOfUploadFiles">
+		<input type="hidden" id="HandOffFolderLocation" value="<?php echo $this->form->getValue('HandOffFolderLocation'); ?>" name="HandOffFolderLocation">
+		<?php echo $this->form->hash; ?>	
+	</dl>
+</form>
+<script type="text/javascript">
+	$(function(){
+		$('#HandOffTitle').focus();
+		$('#ui-datepicker-div').css("z-index", "11");
+		$('#HandOffStartProject').datepicker({
+			showOn: "button",
+			buttonImage: "<?php echo $this->baseUrl('/images/calendar.gif');?>",
+			dateFormat: 'yy-mm-dd',
+			buttonImageOnly: true
+		});
+		
+		$('#ExpectedHandBackDate').datepicker({
+			showOn: "button",
+			buttonImage: "<?php echo $this->baseUrl('/images/calendar.gif');?>",
+			dateFormat: 'yy-mm-dd',
+			buttonImageOnly: true
+		});
+		
+		
+		if( $('#checkboxExpectedHandbackDate').is(":checked")){
+			$('#ExpectedHandBackDate').attr('disabled', false);
+		}
+		else{
+			$('#ExpectedHandBackDate').attr('disabled', true);
+			//$("#ExpectedHandBackDate-element .ui-datepicker-trigger").unbind("click");
+		}
+		
+		$("#checkboxExpectedHandbackDate").change(function(){			
+			if( $("#checkboxExpectedHandbackDate").is(":checked")){
+				$("#ExpectedHandBackDate").attr('disabled', false);
+			}
+			else{
+				$("#ExpectedHandBackDate").attr('disabled', true);
+				//$("#ExpectedHandBackDate-element .ui-datepicker-trigger").unbind("click");
+			}
+		});
+		
+		$('#submitbutton').click(function(){			
+			$('#submitbutton').unbind('click');
+			$("#processRunningLabel").show();
+			$('#saveuploadlaterbutton').attr('disabled','disabled');
+			$('#cancelbutton').attr('disabled','disabled');
+		});	
+		
+		<?php if (!$this->allowEditFieldInHoRecord):?>
+			$("#HandOffTitle").attr('disabled','disabled');
+			$("#HandOffStartProject").attr('disabled','disabled');
+			$("#HandOffSourceLanguageID").attr('disabled','disabled');
+			$("#HandOffSourceLanguageID option:selected").each(function(){
+				$(this).css({'background-color':'#3169C6'});
+			});
+			
+			$("#HandOffSourceLanguageID").css({'background-color':'#EFEBE7'});
+			$("#HandOffListTargetLanguageID input").attr('disabled','disabled');
+			$("#HandOffListTargetLanguageID").css({'background-color':'#EFEBE7'});
+			$("#HandOffStartProject-element .ui-datepicker-trigger").unbind("click");
+			
+			$("#content_rte").contents().find('html').keypress(function(e){
+				return false;				
+			});
+			
+			if ( $.browser.msie ){
+				var position = $("#content_rte").position();
+				var style = "height:" + 190 + "px;width:" + $("#content_rte").width() +"px;z-index:1;background:url(x.gif);";
+				$('#content_rte').after("<div style='" + style + "position:relative" + "'></div>");
+				$('#content_rte').wrap("<div style='" + style + "position:absolute" + "'/>");			
+			}
+		<?php endif;?>
+		
+		
+		if($('#HandOffStatus').val() == '<?php echo Application_Model_DbTable_HOs::HO_CREATED;?>'){
+			$('#NotifyHoStatusChangeLabel').hide();
+			$('#NotifyHoStatusChange').removeAttr('checked');
+		}
+		$('#HandOffStatus').change(function(){
+			if ( ($('#HandOffStatus').val() == '<?php echo Application_Model_DbTable_HOs::HO_UPLOADED;?>') || 
+				($('#HandOffStatus').val() == '<?php echo Application_Model_DbTable_HOs::HO_CANCELLED;?>') ||
+				($('#HandOffStatus').val() == '<?php echo Application_Model_DbTable_HOs::HO_CLOSED;?>') ||
+				($('#HandOffStatus').val() == '<?php echo Application_Model_DbTable_HOs::HB_COMPLETED;?>')){
+					$('#saveuploadlaterbutton').attr('disabled','disabled');				
+			}	
+			else{
+				$('#saveuploadlaterbutton').removeAttr('disabled');
+			}
+			
+			if (($('#HandOffStatus').val() == '<?php echo Application_Model_DbTable_HOs::HO_CANCELLED;?>') ||
+				($('#HandOffStatus').val() == '<?php echo Application_Model_DbTable_HOs::HO_CLOSED;?>') ||
+				($('#HandOffStatus').val() == '<?php echo Application_Model_DbTable_HOs::HB_COMPLETED;?>') ||
+				($('#HandOffStatus').val() == '<?php echo Application_Model_DbTable_HOs::HO_CREATED;?>')){
+					$('#NotifyHoStatusChangeLabel').hide();
+					$('#NotifyHoStatusChange').removeAttr('checked');
+			}	
+			else{
+				$('#NotifyHoStatusChangeLabel').show();
+			}						
+		});
+	});
+</script>

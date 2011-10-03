@@ -1,0 +1,46 @@
+<?php
+	$this->headTitle("ViewDetail Email Template |");	
+	$this->headLink()->appendStylesheet($this->baseUrl('/css/default.css'));	
+?>
+
+<form method="post" action="<?php echo $this->url(array('action'=>'index')); ?>">
+	<dl class="zend_form">
+		<dt id="EmailTemplateID-label">
+			<label class="required" for="EmailTemplateID">EmailTemplateID</label>
+		</dt>
+		<dd id="EmailTemplateID-element">
+			<?php echo $this->emailTemplate->EmailTemplateID;?>
+		</dd>
+		<dt id="EmailTemplateSubject-label">
+			<label class="required" for="EmailTemplateSubject">Email Template Subject</label>
+		</dt>
+		<dd id="EmailTemplateSubject-element">
+			<?php echo $this->emailTemplate->EmailTemplateSubject;?>
+		</dd>
+		<dt id="EmailTemplateContent-label">
+			<label class="required" for="EmailTemplateContent">EmailTemplateContent</label>
+		</dt>
+		<dd id="EmailTemplateContent-element">	
+			<div style="width:470px; overflow : auto;">
+				<?php echo html_entity_decode($this->emailTemplate->EmailTemplateContent);?>
+			</div>	
+		</dd>	
+		<dt id="EmailTemplateStatus-label">
+			<label class="optional" for="EmailTemplateStatus">Email template Status</label>
+		</dt>
+		<dd id="EmailTemplateIsActive-element">
+			<?php echo $this->escape($this->emailTemplate->EmailTemplateStatus);?>
+		</dd>
+		<dt id="EmailTemplateIsActive-label">
+			<label class="optional" for="EmailTemplateIsActive">Email template Is active</label>
+		</dt>
+		<dd id="EmailTemplateIsActive-element">
+			<?php echo $this->escape($this->emailTemplate->EmailTemplateIsActive);?>
+		</dd>
+		<dt id="submit-label">&nbsp;</dt>
+		<dd id="submit-element">
+			<input type="submit" value="Save" id="submitbutton" name="submit">
+		</dd>
+	</dl>
+</form>
+

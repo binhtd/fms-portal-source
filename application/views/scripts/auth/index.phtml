@@ -1,0 +1,63 @@
+<?php
+	$this->headTitle("Login |");
+?>
+<noscript>	
+	<p class="errors">JavaScript must be enabled in order for you to use our portal in standard view. However, it seems JavaScript is either disabled or not supported by your browser. To use standard view, enable JavaScript by changing your browser options, then try again.
+	</p>
+</noscript>
+<?php if( isset($this->messageForBrowserUnSupport)):?>
+	<p class="errors">
+		<?php echo $this->messageForBrowserUnSupport;?>
+	</p>
+<?php endif;?>
+<p style="text-align:center;margin-top:0px;margin-bottom:0px;padding:0px;">
+	<img src="<?php echo $this->baseUrl('/images/bento_logo.png');?>" alt="bento logo" id="logo" />
+</p>
+<form action="<?php echo $this->url( array("controller"=> "auth", "action"=>"index"));?>" id="loginform" method="post">	
+	<noscript>
+		<input name="js_enabled" type="hidden" value="1">
+	</noscript>
+	<p id="logintitle">LOGIN</p><br />
+	<label for="user">User Name:</label>
+	<input type="text" id="username" name="username" value=""  /><br />	
+	<label for="password">Password:</label>
+	<input type="password" id="password" name="password" value=""/><br />	
+	
+	<?php if($this->yourLoginRequest > 2):?>
+		<label for="password">Security key:</label>
+		<input id="captcha" type="text" name="captcha" /> <br />
+		<label for="password">&nbsp;</label>
+		<?php echo $this->captcha->render($this, null) ?> <br/>
+		<input type="hidden" name="cid" value="<?php echo $this->captcha->getId() ?>" >
+	<?php endif;?>
+	
+	<input type="submit" value="Login" id="submitbutton" />	
+	<?php if( count($this->form->username->getMessages()) >0 || count($this->form->password->getMessages()) >0 || $this->form->getDescription()!=""): ?>
+		<ul class="errors">
+			<?php foreach($this->form->username->getMessages() as $error): ?>
+				<li>username <?php echo strtolower($error); ?></li>
+			<?php endforeach;?>
+			
+			<?php foreach($this->form->password->getMessages() as $error): ?>
+				<li>password <?php echo strtolower($error); ?></li>
+			<?php endforeach;?>
+		</ul>
+	<?php endif;?>
+	<?php if( $this->form->getDescription() != ""): ?>
+		<ul class="errors">
+			<li><?php echo $this->form->getDescription() ; ?></li>
+		</ul>
+	<?php endif;?>
+	
+	<br />
+	<a href="<?php echo $this->url(array('controller'=>'index', 'action'=>'send-email-request', "emailSubjectType" => "1"))?>" class="loginlink">Forgot Password?</a>
+	<br />
+	<a href="<?php echo $this->url(array('controller'=>'index', 'action'=>'send-email-request', "emailSubjectType" => "2"))?>" class="loginlink">Create a Bento Account</a>	
+	<br />
+	<?php echo $this->form->hash; ?>
+</form>
+<script type="text/javascript">
+	$(function(){
+		$('#username').focus();
+	});
+</script>

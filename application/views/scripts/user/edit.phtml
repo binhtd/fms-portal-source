@@ -1,0 +1,43 @@
+<?php
+$this->title = "Edit User |";
+$this->headTitle($this->title);
+echo $this->headScript()->appendFile($this->baseUrl('/javascripts/jquery-ui-1.8.10.custom.min.js'));
+echo $this->headLink()->prependStylesheet($this->baseUrl('/css/base/jquery.ui.all.css'));
+?>
+<?php if (isset($this->updateErrorMessage)) :?>
+<ul class="errors">
+	<li><?php echo $this->updateErrorMessage; ?></li>
+</ul>
+<?php endif;?>
+<?php			
+echo $this->form;
+?>
+<script>
+	$(function() {
+		$('#UserName').focus();
+		$( "#JtepmEmail" ).autocomplete({
+			source: ["<?php echo join("\", \"", $this->jtepmEmailList); ?>"]
+		});
+		
+		$("#UserIsClient-N").click(function(){		
+			$("#JtepmEmail-label").hide();
+			$("#JtepmEmail-element").hide();	
+		});
+		
+		$("#UserIsClient-Y").click(function(){		
+			$("#JtepmEmail-label").show();
+			$("#JtepmEmail-element").show();	
+		});
+		
+		if( $("#UserIsClient-N").is(":checked")){
+			$("#JtepmEmail-label").hide();
+			$("#JtepmEmail-element").hide();	
+		}
+		
+		if ( $.browser.msie ){			
+			$("#UserLoginName").css("width", "204px");
+			$("#UserPassword").css("width", "204px");
+			$("#UserConfirmPassword").css("width", "204px");
+		}
+	});
+</script>

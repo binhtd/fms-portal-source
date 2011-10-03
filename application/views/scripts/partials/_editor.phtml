@@ -1,0 +1,35 @@
+<?php
+	$this->headLink()->appendStylesheet($this->baseUrl('/css/jqcp.css'));
+	$this->headLink()->appendStylesheet($this->baseUrl('/css/jqpopup.css'));
+	$this->headLink()->appendStylesheet($this->baseUrl('/css/jqrte.css'));
+
+	$this->headScript()->appendFile($this->baseUrl("/javascripts/jquery.bgiframe.min.js"));
+	$this->headScript()->appendFile($this->baseUrl("/javascripts/jqDnR.min.js"));
+	$this->headScript()->appendFile($this->baseUrl("/javascripts/jquery.jqpopup.min.js"));
+	$this->headScript()->appendFile($this->baseUrl("/javascripts/jquery.jqcp.min.js"));
+	$this->headScript()->appendFile($this->baseUrl("/javascripts/jquery.jqrte.min.js"));	
+?>
+
+<?php
+$language="enus";
+include_once("web-editor/locale/".$language.".php");
+?>
+<?php
+ include_once("web-editor/content_editor.php");
+ include_once("web-editor/editor.php");
+?>
+<textarea id="content" name="content" class="jqrte_popup" rows="5" cols="5"><?php echo $this->webeditordata; ?></textarea>	 		  
+
+<script type="text/javascript">
+   window.onload = function(){ 
+      try{
+         $("#content_rte").jqrte();
+      }
+      catch(e){}
+   } 
+
+   $(document).ready(function() {
+         $("#content_rte").jqrte_setIcon();
+         $("#content_rte").jqrte_setContent();
+   });
+</script>

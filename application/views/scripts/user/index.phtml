@@ -1,0 +1,79 @@
+<?php
+	$this->title = "Index User |";
+	$this->headTitle($this->title);
+?>
+<form method="post" action="<?php echo $this->url(array('controller' => 'user', 'action' => 'index')); ?>">
+	<?php if($this->allowModifyUser):?>
+		<a href="<?php echo $this->url(array('controller'=>'user', 'action'=>'add', 'page' => null, "limit"=> null));?>">Add new user</a>
+	<?php endif;?>
+	<table class="adminlist" border="1px">
+		<thead>			
+			<?php
+				// Display pagination control
+				echo $this->paginationControl($this->paginator, 'Sliding', '/partials/paginator.phtml', array("colspan" => 6));
+			?>
+			<tr>				
+				<th width="15%">
+					User Name
+				</th>
+				<th width="15%">
+					User Login Name
+				</th>
+				<th width="10%">
+					UserIsClient
+				</th>
+				<th width="10%">
+					JtepmEmail
+				</th>
+				<th width="5%">
+					Active
+				</th>		
+				<th width="15%">
+					&nbsp;
+				</th>
+			</tr>
+		</thead>
+		<tfoot>
+			<?php
+				// Display pagination control
+				echo $this->paginationControl($this->paginator, 'Sliding', '/partials/paginator.phtml', array("colspan" => 6));
+			?>
+		</tfoot>
+		<tbody>
+		<?php 
+			if ( 0 == count($this->resultSet)){
+				echo $this->partial('/partials/paginator_nodata.phtml', array("colspan" => 6));
+			}				
+		?>
+		<?php foreach($this->resultSet as $user ):?>
+			<tr>	
+				<td class="center">
+					<?php echo $this->escape($user->UserName);?>
+				 </td>
+				<td class="center">
+					<?php echo $this->escape($user->UserLoginName);?>				
+				</td>
+				<td class="center">
+					<?php echo $this->escape($user->UserIsClient);?>				
+				</td>
+				<td class="center">
+					<?php echo $user->JtepmEmail != null ?$this->escape($user->JtepmEmail): "N/A";?>				
+				</td>
+				<td class="center">
+					<?php echo $this->escape($user->UserIsActive);?>				
+				</td>
+				<td class="center">
+					<a href="<?php echo $this->url(array('controller'=>'user', 'action'=>'viewdetail',
+					'userID'=>$this->escape($user->UserID), 'page' => null, "limit"=> null));?>">Details</a>
+					<?php if($user->AllowModifyUserRecord): ?>|
+						<a href="<?php echo $this->url(array('controller'=>'user', 'action'=>'edit',
+						'userID'=>$this->escape($user->UserID), 'page' => null, "limit"=> null));?>">Edit</a> |
+						<a href="<?php echo $this->url(array('controller'=>'user','action'=>'delete',
+						'userID'=>$this->escape($user->UserID), 'page' => null, "limit"=> null));?>">Delete</a>
+					<?php endif;?>	
+				</td>
+			</tr>		
+			<?php endforeach;?>
+		</tbody>
+	</table>
+</form>	

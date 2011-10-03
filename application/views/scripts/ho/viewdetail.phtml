@@ -1,0 +1,83 @@
+<?php
+$this->title = "ViewDetail HO |";
+$this->headTitle($this->title);
+?>
+<form method="post" action="<?php echo $this->url(array('action'=>'index')); ?>">
+<dl class="zend_form">
+	<dt id="HandOffID-label">
+		<label class="required" for="HandOffID">Handoff ID</label>
+	</dt>
+	<dd id="HandOffID-element">
+		<?php echo $this->escape($this->ho->HandOffID);?>
+	</dd>
+	
+	<dt id="UserID-label">
+		<label class="required" for="UserID">User ID</label>
+	</dt>
+	<dd id="UserID-element">
+		<?php echo $this->escape($this->ho->UserID);?>
+	</dd>
+	
+	<dt id="HandOffTitle-label">
+		<label class="required" for="hoEmaHandOffTitleil">Handoff Title</label>
+	</dt>
+	<dd id="HandOffTitle-element">
+		<?php echo $this->escape($this->ho->HandOffTitle);?>
+	</dd>
+	
+	<dt id="HandOffTotalNumberOfUploadFiles-label">
+		<label class="required" for="HandOffTotalNumberOfUploadFiles">Total Files</label>
+	</dt>
+	<dd id="HandOffTotalNumberOfUploadFiles-element">
+		<?php echo $this->escape($this->ho->HandOffTotalNumberOfUploadFiles);?>
+	</dd>
+	
+	<dt id="HandOffUploadDate-label">
+		<label class="required" for="HandOffUploadDate">Handoff Upload Date</label>
+	</dt>
+	<dd id="HandOffUploadDate-element">
+		<?php echo $this->escape($this->ho->HandOffUploadDate);?>
+	</dd>
+	
+	<dt id="HandOffStartProject-label">
+		<label class="required" for="HandOffStartProject">Handoff Start Project</label>
+	</dt>
+	<dd id="HandOffStartProject-element">
+		<?php echo $this->escape($this->ho->HandOffStartProject);?>
+	</dd>
+		
+	<dt id="HandOffStatus-label">
+		<label class="optional" for="HandOffStatus">Handoff Status</label>
+	</dt>
+	<dd id="HandOffStatus-element">	
+		<?php echo $this->escape($this->ho->HandOffStatus);?>				
+	</dd>
+	
+	<dt id="HandOffSourceLanguageID-label">
+		<label class="optional" for="HandOffSourceLanguageID">Source Language</label>
+	</dt>
+	<dd id="HandOffSourceLanguageID">	
+		<?php echo $this->escape($this->ho->HandOffSourceLanguageName);?>
+	</dd>
+	<dt id="HandOffSourceLanguageID-label">
+		<label class="optional" for="HandOffSourceLanguageID">Target Language</label>
+	</dt>
+	<dd id="HandOffSourceLanguageID">	
+		<div style="width:470px; overflow : auto;">
+			<?php echo $this->escape($this->ho->HandOffTargetLanguageName);?>
+		</div>	
+	</dd>	
+	<dt id="HandOffInstruction">
+		<label class="optional" for="HandOffInstruction" >Handoff Instruction</label>
+	</dt>
+	<dd id="HandOffInstruction-element">
+		<div style="width:470px; overflow : auto;">
+			<?php echo html_entity_decode ($this->ho->HandOffInstruction);?>
+		</div>
+	</dd>
+
+	<dt id="submit-label">&nbsp;</dt>
+	<dd id="submit-element">
+		<input type="submit" value="Back" id="submitbutton" name="submit">
+	</dd>
+</dl>

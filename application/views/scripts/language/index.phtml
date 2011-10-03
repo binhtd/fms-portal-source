@@ -1,0 +1,74 @@
+<?php
+$this->title = "Index Language |";
+$this->headTitle($this->title);
+?>
+<form method="post" action="<?php echo $this->url(array('controller' => 'language', 'action' => 'index')); ?>">
+	<a href="<?php echo $this->url(array('controller'=>'language',
+		'action'=>'add', 'page' => null, "limit"=> null));?>">Add new language</a>
+	<table class="adminlist" border="1px">
+			<thead>
+				<?php
+					// Display pagination control
+					echo $this->paginationControl($this->paginator, 'Sliding', '/partials/paginator.phtml', array("colspan" => 6));
+				?>			
+				<tr>				
+					<th width="5%">
+						LanguageID
+					</th>
+					<th width="35%">
+						Language
+					</th>
+					<th width="5%">
+						Source Language	
+					</th>
+					<th width="5%">
+						Target Language	
+					</th>	
+					<th width="5%">
+						LanguageIsActive	
+					</th>	
+					<th width="15%">
+						&nbsp;
+					</th>
+				</tr>
+			</thead>
+			<tfoot>
+				<?php
+					// Display pagination control
+					echo $this->paginationControl($this->paginator, 'Sliding', '/partials/paginator.phtml', array("colspan" => 6));
+				?>			
+			</tfoot>
+			<tbody>
+				<?php 
+					if ( 0 == count($this->resultSet)){
+						echo $this->partial('/partials/paginator_nodata.phtml', array("colspan" => 6));
+					}				
+				?>
+				<?php foreach($this->resultSet as $language ):?>
+				<tr>	
+					<td class="center">
+						<?php echo $this->escape($language->LanguageID);?>
+					 </td>
+					<td class="center">
+						<?php echo $this->escape($language->LanguageName);?>				
+					</td>			
+					<td class="center">
+						<?php echo $this->escape($language->LanguageIsShowInSourceList);?>				
+					</td>					
+					<td class="center">
+						<?php echo $this->escape($language->LanguageIsShowInTargetList);?>				
+					</td>	
+					<td class="center">
+						<?php echo $this->escape($language->LanguageIsActive);?>				
+					</td>
+					<td class="center">			
+						<a href="<?php echo $this->url(array('controller'=>'language', 'action'=>'edit',
+						'languageID'=>$this->escape($language->LanguageID), 'page' => null, "limit"=> null));?>">Edit</a> |
+						<a href="<?php echo $this->url(array('controller'=>'language','action'=>'delete',
+						'languageID'=>$this->escape($language->LanguageID), 'page' => null, "limit"=> null));?>">Delete</a>
+					</td>
+				</tr>		
+				<?php endforeach;?>
+			</tbody>
+	</table>
+</form>	

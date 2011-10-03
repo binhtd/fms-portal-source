@@ -1,0 +1,60 @@
+<?php if ($this->pageCount): ?>
+<tr>
+	<td colspan="<?php echo $this->colspan;?>" align="center">
+		<div class="paginator"> 
+			Display #		
+			<select class="limit">
+				<?php foreach (array(5, 10, 15, 20, 25, 30, 50, 100) as $itemsPerPage): ?>
+				<option  value="<?php echo $this->url(array('limit' => $itemsPerPage, 'page' => null));?>"			
+					<?php echo ($itemsPerPage == $this->itemCountPerPage) ? ' selected="selected"' : ''; ?>>
+					<?php echo $itemsPerPage; ?>
+				</option>
+				<?php endforeach; ?>
+			</select>
+		 
+		<?php if (isset($this->previous)): ?>
+		<a href="<?php echo $this->url(array('page' => $this->first)); ?>">First </a> |
+		<?php else: ?>
+		  <span class="disabled">First</span> |
+		<?php endif; ?>
+
+		<!-- Previous page link -->
+		<?php if (isset($this->previous)): ?>
+		  <a href="<?php echo $this->url(array('page' => $this->previous)); ?>"> &lt; Previous  </a> |
+		<?php else: ?>
+		<span class="disabled">&lt; Previous</span> |
+		<?php endif; ?>
+
+
+		<?php foreach ($this->pagesInRange as $page): ?>
+			<a href="<?php echo $this->url(array('page' => $page)); ?>"><?php echo $page;?></a> |	
+		<?php endforeach; ?>
+
+
+		<!-- Next page link -->
+		<?php if (isset($this->next)): ?>
+		<a href="<?php echo $this->url(array('page' => $this->next)); ?>">  Next &gt; </a> |
+		<?php else: ?>
+		<span class="disabled">Next &gt;</span> |
+		<?php endif; ?>
+
+		<!-- Last page link -->
+		<?php if (isset($this->next)): ?>
+		<a href="<?php echo $this->url(array('page' => $this->last)); ?>">  Last  </a>
+		<?php else: ?>
+		<span class="disabled">Last</span>
+		<?php endif; ?>
+		&nbsp;&nbsp;&nbsp; (Total records:<?php echo $this->totalItemCount; ?>)&nbsp;(Page
+		<?php echo $this->current; ?> of <?php echo $this->pageCount; ?>)
+		<script type="text/javascript">
+
+		$('.limit').change(function() {	
+			$(this).closest("form").attr("action", this.options[this.selectedIndex].value);
+			$(this).closest("form").submit();
+		})
+		</script> 
+		</div>
+	</td>
+</tr>		
+<?php endif; ?>
+

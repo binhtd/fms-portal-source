@@ -1,0 +1,34 @@
+<p>
+	Jonckers Employees might log specific bugs related to this portal using the J-TRAC issue Tracker <a href="http://jte-jtrac.jonckers.be/jtrac">(http://jte-jtrac.jonckers.be/jtrac).</a>
+</p>
+<p>
+	For more information on our professional services, please contact Jonckers through this form <a href="http://www.jonckers.com/contact-us">(http://www.jonckers.com/contact-us).</a>
+</p>
+<p>
+	For any request about this Portal, Please send an email to our admin using the form below.
+</p>
+<p class="warning" id="processRunningLabel">
+<img src="<?php echo $this->baseUrl('/images/ajax-loader.gif');?>"/>
+	process is running
+</p>
+<?php
+	echo $this->form;
+?>
+<script type="text/javascript">
+	$('#submitbutton').click(function(){			
+		$('#submitbutton').unbind('click');
+		$("#processRunningLabel").show();	
+	});	
+	$(function(){
+		$('#YourEmailAddress').focus();
+	});
+</script>
+<p>
+	<a href="<?php echo $this->baseUrl('/ho/index');?>">Back to Bento Localization Portal</a>	
+<p>
+
+
+
+
+
+

@@ -1,0 +1,15 @@
+<?php
+$this->title = "Delete HB |";
+$this->headTitle($this->title);
+?>
+<div class="zend_form">
+<p>Are you sure that you want to delete
+handbackid <?php echo $this->escape($this->hb->HandBackID); ?> for handoffid <?php echo $this->escape($this->hb->HandOffID); ?> ?
+</p>
+<form action="<?php echo $this->url(array('action'=>'delete')); ?>" method="post">
+	<input type="hidden" name="handbackid" value="<?php echo $this->hb->HandBackID; ?>" />
+	<input type="submit" name="del" value="Yes" />
+	<input type="submit" name="del" value="No" />
+</form>
+<br />
+</div>

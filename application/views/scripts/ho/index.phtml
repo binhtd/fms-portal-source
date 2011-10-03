@@ -1,0 +1,133 @@
+<?php
+$this->title = "Index HO |";
+$this->headTitle($this->title);
+?>
+<form method="post" action="<?php echo $this->url(array('controller' => 'ho', 'action' => 'index')); ?>">
+	<?php if($this->showAddNewHoButton):?>
+		<a href="<?php echo $this->url(array('controller'=>'ho',
+		'action'=>'add'));?>" id="addnewhandoff" class="AddNewHoOrHBLink">Add new Handoff</a><br/>
+	<?php endif;?>	
+	<table class="adminlist" border="1px">
+			<thead>
+				<?php
+					// Display pagination control
+					echo $this->paginationControl($this->paginator, 'Sliding', '/partials/paginator.phtml', array("colspan" => 8));
+				?>
+				<tr>				
+					<th width="5%">
+						Reference ID
+					</th>
+					<th width="10%">
+						Client
+					</th>
+					<th width="10%">
+						Title
+					</th>
+					<th width="8%">
+						Handoff Files
+					</th>		
+					<th width="5%">
+						#files
+					</th>		
+					<th width="12%">
+						Status
+					</th>
+					<th width="6%">
+						Handback Files
+					</th>		
+					<th width="8%">
+						&nbsp;
+					</th>
+				</tr>
+			</thead>
+			<tfoot>
+				<?php
+					// Display pagination control
+					echo $this->paginationControl($this->paginator, 'Sliding', '/partials/paginator.phtml', array("colspan" => 8));
+				?>
+			</tfoot>
+			<tbody>
+				<?php 
+					if ( 0 == count($this->resultSet)){
+						echo $this->partial('/partials/paginator_nodata.phtml', array("colspan" => 8));
+					}				
+				?>
+				<?php foreach($this->resultSet as $handoff ):?>
+					<tr>	
+						<td class="center">
+							<?php echo "BENTO_" . str_pad($handoff->HandOffID, 8 , '0', STR_PAD_LEFT); ?>
+						 </td>
+						<td class="center">
+							<?php echo $handoff->UserName; ?>
+						</td>
+						<td class="center">
+							<?php echo $handoff->HandOffTitle; ?>
+						</td>
+						<td class="center">
+							<?php if(0 == $handoff->HandOffTotalNumberOfUploadFiles):?>
+								N/A
+							<?php else: ?>
+								<a href="<?php echo $this->url(array('controller' => 'fm', 'action' => 'index',
+								'handoffid'=> $handoff->HandOffID, "download"=> "ho", "limit" => null,
+								"page" => null)); ?>">View files</a>
+							<?php endif;?>
+						</td>
+						<td class="center">
+							<?php echo ($handoff->HandOffTotalNumberOfUploadFiles <> 0) ? $handoff->HandOffTotalNumberOfUploadFiles : "<span style='color:red'>" . $handoff->HandOffTotalNumberOfUploadFiles ."</span>" ; ?>
+						</td>
+						<td class="center">
+							<?php echo $handoff->HandOffStatus; ?>
+						</td>
+						<td class="center">							
+							<?php
+								$hbs = $this->getHBForOneHandOffID($handoff->HandOffID);
+							?>
+							<?php if ((0 <> count($hbs)) && (Application_Model_DbTable_HOs::getHOStatusOrder($handoff->HandOffStatus) >= Application_Model_DbTable_HOs::getHOStatusOrder(Application_Model_DbTable_HOs::HB_COMPLETED))): ?>
+								<?php foreach($hbs as $hb): ?>
+									<?php if (0 <> $hb->HandBackTotalNumberOfUploadFiles ):?>
+										<a href="<?php echo $this->url(array('controller' => 'fm', 'action' => 'index',
+										'handoffid'=> $handoff->HandOffID, "download"=> "hb", "limit" => null, "page" => null
+										)); ?>">View files</a> <br/>
+									<?php else:?>
+										N/A
+									<?php endif;?>
+								<?php endforeach;?>	
+							<?php else:?>
+								N/A
+							<?php endif; ?>
+						</td>
+						<td class="center">							
+							<a href="<?php echo $this->url(array('controller' => 'ho', 'action' => 'viewdetail','handoffid'=> $handoff->HandOffID )); ?>">Details</a>
+							<?php if ($handoff->AllowEditHoRecord && $handoff->AllowShowEditDepentOnRoleAndHoStatus):?>
+								 |
+								<a href="<?php echo $this->url(array('controller' => 'ho', 'action'=>'edit','handoffid' => $handoff->HandOffID)); ?>">Edit</a>
+							<?php endif;?>	
+							<?php if ($handoff->AllowDeleteHoRecord && $handoff->AllowShowEditDepentOnRoleAndHoStatus):?>
+								 |
+								<a href="<?php echo $this->url(array('controller' => 'ho','action'=>'delete','handoffid'=> $handoff->HandOffID)); ?>">Delete</a>
+							<?php endif;?>
+						</td>
+					</tr>
+				<?php endforeach;?>	
+			</tbody>
+	</table>
+
+		
+	<input type="checkbox" value="<?php echo $this->HIDE_CLOSED_HOS; ?>" <?php echo $this->hideClosedHoCheckedButton? "checked ='checked'" : ""; ?> name="HideClosedHos" id="HideClosedHos">Hide closed Handoffs<br/>
+</form>
+<script type="text/javascript">
+	$("#HideClosedHos").click(function(){
+		$(this).closest("form").submit();
+	});
+	
+	$(document).ready( function(){
+		$(".paginator a").each(function(index){
+			$(this).click(function(event){
+			    event.preventDefault();
+				$(this).closest("form").attr("action", $(this).attr("href"));
+				$(this).closest("form").submit();
+			});
+
+		});
+	});
+</script>

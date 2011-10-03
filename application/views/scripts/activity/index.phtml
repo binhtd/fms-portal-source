@@ -1,0 +1,104 @@
+<?php
+$this->title = "Activity Language |";
+$this->headTitle($this->title);
+
+echo $this->headScript()->appendFile($this->baseUrl('/javascripts/jquery-ui-1.8.16.custom.min.js'));
+echo $this->headLink()->prependStylesheet($this->baseUrl('/css/ui-lightness/jquery-ui-1.8.10.custom.css'));
+?>
+<form method="post" action="<?php echo $this->url(array('controller' => 'activity', 'action' => 'search')); ?>">
+	<table class="adminlist" border="1px">
+			<thead>			
+				<tr>
+					<td colspan="3">
+						User
+						<select style="width: 100px;"  id="userid" name="userid">
+							<option value="all" >
+									all
+							</option>
+							<?php foreach($this->users as $user):?>								
+								<option value="<?php echo $user->UserLoginName; ?>" 
+								<?php if($this->userid == $user->UserLoginName){  
+									echo "selected='selected'";
+								}
+								?>>
+									<?php echo $user->UserLoginName; ?>
+								</option>
+							<?php endforeach; ?>
+						</select>
+						Start Date
+						<input type="text" size="10" value="<?php echo $this->activityStartDate; ?>" id="activityStartDate" name="activityStartDate">
+						End Date
+						<input type="text" size="10" id="activityEndDate" value="<?php echo $this->activityEndDate; ?>" name="activityEndDate">
+						&nbsp;&nbsp;
+						<input type="submit" value="Search" id="searchActivity" name="searchActivity"/>
+					</td>
+				</tr>
+				<tr>				
+					<th width="15%">
+						UserName
+					</th>
+					<th width="50%">
+						UserActivity
+					</th>	
+					<th width="15%">
+						Timestamp	
+					</th>	
+					
+				</tr>
+			</thead>
+			<tfoot>
+				<?php
+					// Display pagination control
+					echo $this->paginationControl($this->paginator, 'Sliding', '/partials/paginator.phtml', array("colspan" => 3));
+				?>			
+			</tfoot>
+			<tbody>
+				<?php 
+					if ( 0 == count($this->resultSet)){
+						echo $this->partial('/partials/paginator_nodata.phtml', array("colspan" => 3));
+					}				
+				?>
+				<?php foreach($this->resultSet as $activity ):?>
+				<tr>	
+					<td class="center">
+						<?php echo $this->escape($activity->UserName);?>
+					 </td>
+					<td class="center">
+						<?php echo $this->escape($activity->UserActivity);?>				
+					</td>			
+					</td>			
+					<td class="center">
+						<?php echo $this->escape($activity->UserActivityDateTime);?>				
+					</td>						
+				</tr>		
+				<?php endforeach;?>
+			</tbody>
+	</table>
+</form>	
+<script type="text/javascript">
+	$(function(){
+
+		$('#activityStartDate').datepicker({
+			showOn: "button",
+			buttonImage: "<?php echo $this->baseUrl('/images/calendar.gif');?>",
+			dateFormat: 'yy-mm-dd',
+			buttonImageOnly: true
+		});
+		
+		$('#activityEndDate').datepicker({
+			showOn: "button",
+			buttonImage: "<?php echo $this->baseUrl('/images/calendar.gif');?>",
+			dateFormat: 'yy-mm-dd',
+			buttonImageOnly: true
+		});
+		
+		$(".paginator a").each(function(index){
+			$(this).click(function(event){
+			    event.preventDefault();
+				$(this).closest("form").attr("action", $(this).attr("href"));
+				$(this).closest("form").submit();
+			});
+
+		});
+	});
+</script>

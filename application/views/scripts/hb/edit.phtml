@@ -1,0 +1,40 @@
+<?php
+$this->title = "Edit HB |";
+$this->headTitle($this->title);
+?>
+
+<form method="post" action="<?php echo $this->url(); ?>" enctype="application/x-www-form-urlencoded" id="HO">
+	<dl class="zend_form">
+		<dt id="HandOff-label">
+			<label class="required" for="HandOff">Handoff Title</label>
+		</dt>
+		<dd id="HandOff-element">			
+			<?php echo $this->escape($this->handOffTitle) ;?>
+		</dd>		
+		<dt id="HandBackComments-label">
+			<label class="required" for="HandBackComments">Handback Comments</label>
+		</dt>
+		<dd id="HandBackComments-element" style="clear:left; margin-left:0px">
+			<?php echo $this->partial('/partials/_editor.phtml', array("webeditordata" =>  isset($this->content)? $this->content : null))?>
+			<?php if ( isset($this->ContentMessage)): ?>
+				<ul class="errors">				
+						<li><?php echo $this->ContentMessage; ?></li>					
+				</ul>
+			<?php endif;?>
+		</dd>
+		<dd id="hoaddlistbuttonaction">			
+			<input type="submit" value="<?php echo $this->SAVE_UPLOAD; ?>" 
+			<?php if(!$this->validHOStatusForSaveUpload):?> 
+				disabled="disabled" 
+			<?php endif;?>	
+			id="saveuploadlaterbutton" name="action">	
+			<input type="submit" value="<?php echo $this->SAVE_UPLOAD_LATER; ?>" id="submitbutton" name="action">			
+			<input type="submit" value="<?php echo $this->CANCEL; ?>" id="cancelbutton" name="action">
+		</dd>
+	</dl>
+</form>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#content_rte").focus();
+	});	
+</script>

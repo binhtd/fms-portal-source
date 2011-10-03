@@ -1,0 +1,17 @@
+<?php
+$this->title = "Delete Language |";
+$this->headTitle($this->title);
+?>
+<div class="zend_form">
+<p class="errors">Please note that all Handoff information related to that language will be also deleted.</p>
+<p>Are you sure that you want to delete
+LanguageID <?php echo $this->escape($this->language->LanguageID); ?> by
+LanguageName <?php echo $this->escape($this->language->LanguageName); ?>
+</p>
+<form action="<?php echo $this->url(array('action'=>'delete')); ?>" method="post">
+	<input type="hidden" name="languageID" value="<?php echo $this->language->LanguageID; ?>" />
+	<input type="submit" name="del" value="Yes" />
+	<input type="submit" name="del" value="No" />
+</form>
+<br />
+</div>

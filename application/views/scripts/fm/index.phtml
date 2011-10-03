@@ -1,0 +1,51 @@
+<?php
+$this->title = "Index FM |";
+$this->headTitle($this->title);
+?>
+<span>Bento File Management</span>
+<div class="zend_form">
+	<table cellspacing="5" cellpadding="5" border="0" style="width:600px">			
+		<tbody>
+		<?php foreach($this->files as $file): ?>
+			<tr>
+				<td style="width:5%">
+					<img src="<?php echo $this->baseUrl('/images/zip.gif')?>">
+				</td>
+				<td style="width:50%">
+					<a href="<?php echo $this->url(array('controller' => 'fm', 'action' => 'download',
+								'handoffid'=> $file["handoffid"], "download"=> $file["download"], 
+								"filename" => $file["fileinurl"])); ?>">
+						<?php echo $file["filename"]; ?>
+					</a>
+				</td>
+				<td style="width:15%">
+					<?php echo $file["filesize"]; ?>
+				</td>
+				<td style="width:15%">
+					<?php echo $file["createdate"]; ?>
+				</td>
+				<?php if ((bool)$file["allowDelete"]):?>
+					<td style="width:15%">
+						<a onclick="return confirm('are you sure you want to delete this file?');" 
+						href="<?php echo $this->url(array('controller' => 'fm', 'action' => 'delete',
+								'handoffid'=> $file["handoffid"], "download"=> $file["download"], 
+								"filename" => $file["fileinurl"])); ?>">Delete</a></td>
+				<?php endif;?>
+			</tr>		
+		<?php endforeach;?>
+		<?php if ( 0 == count($this->files)):?>			
+			<tr>
+				<td colspan="5" align="center">No data found</td>
+			</tr>
+		<?php endif;?>
+	</tbody>
+	</table>	
+</div>	
+<br/>
+<form method="post" action="<?php $this->baseUrl("fm/index/")?>" enctype="application/x-www-form-urlencoded">
+	<input type="hidden" name ="handoffid" value="<?php echo $this->files[0]["handoffid"]?>">
+	<input type="hidden" name="download" value="<?php echo $this->files[0]["download"]?>">
+	<input type="hidden" name="backurl" value="<?php echo $_SERVER['HTTP_REFERER']?>">
+	<input type="submit" value="Back" id="backbutton" name="backbutton" />
+	<input type="submit" value="Download all" id="Downloadall" name="Downloadall" <?php echo (0 == count($this->files)? 'disabled="true"' : "")?>/>	  	  
+</form>

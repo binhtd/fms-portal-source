@@ -1,0 +1,17 @@
+<?php
+$this->title = "Delete HO |";
+$this->headTitle($this->title);
+?>
+<div class="zend_form">
+<p class="errors">Please note that all Handback information related to that language will be also deleted.</p>
+<p>Are you sure you want to delete
+handoffid <?php echo $this->escape($this->ho->HandOffID); ?> 
+named as <?php echo $this->escape($this->ho->HandOffTitle); ?>?
+</p>
+<form action="<?php echo $this->url(array('action'=>'delete')); ?>" method="post">
+	<input type="hidden" name="handoffid" value="<?php echo $this->ho->HandOffID; ?>" />
+	<input type="submit" name="del" value="Yes" />
+	<input type="submit" name="del" value="No" />
+</form>
+<br />
+</div>

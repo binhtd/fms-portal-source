@@ -1,0 +1,17 @@
+<?php
+$this->title = "Delete User |";
+$this->headTitle($this->title);
+?>
+<div class="zend_form">
+<p class="errors">Please note that all Handoff, Handback information related to that user will be also deleted.</p>
+<p>Are you sure that you want to delete
+userID <?php echo $this->escape($this->user->UserID); ?> with
+userName <?php echo $this->escape($this->user->UserName); ?> ?
+</p>
+<form action="<?php echo $this->url(array('action'=>'delete')); ?>" method="post">
+	<input type="hidden" name="userID" value="<?php echo $this->user->UserID; ?>" />
+	<input type="submit" name="del" value="Yes" />
+	<input type="submit" name="del" value="No" />
+</form>
+<br />
+</div>

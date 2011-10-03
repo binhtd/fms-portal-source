@@ -1,0 +1,16 @@
+<?php
+$this->title = "Delete Email Template";
+$this->headTitle($this->title);
+?>
+<div class="zend_form">
+<p>
+	Are you sure that you want to delete emailTemplateID <?php echo $this->escape($this->emailTemplate->EmailTemplateID); ?> 
+</p><br/>
+<p><?php echo html_entity_decode($this->emailTemplate->EmailTemplateContent); ?></p>
+<form action="<?php echo $this->url(array('action'=>'delete')); ?>" method="post">
+	<input type="hidden" name="emailTemplateID" value="<?php echo $this->emailTemplate->EmailTemplateID; ?>" />
+	<input type="submit" name="del" value="Yes" />
+	<input type="submit" name="del" value="No" />
+</form>
+<br />
+</div>
